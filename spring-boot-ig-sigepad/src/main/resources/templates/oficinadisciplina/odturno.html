@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+          <div class="tile">
+          <div class="tile-title-w-btn line-head">
+			  <h3 class="title"><em th:classappend="${clasetile}" aria-hidden="true"></em> 
+			    <label th:text="${titulotile}"> </label>
+			  </h3>
+			  <p><button type="button" id="nuevoregistro" class="btn btn-info"><em class="fa fa-file"></em>Nuevo Registro</button></p>
+			</div>
+			<div class="tile-body">
+			<div class="card mb-4">
+				
+					<div class="card-body">
+						<div class="row">
+						<div class="col-md-2">
+							<label>Estado</label>
+							<select  id="estado" class="form-control">
+								<option value="1" selected>REGISTRADOS</option>
+								<option value="2">ATENDIDOS</option>
+								<option value="3">TODOS</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+					<label>Desde - Hasta</label>
+					<div class="input-group" id="fechaGroup">
+						<input type="text" class="form-control rangofecha text-center" id="rangohechos" name="fechadesde" readonly>
+						<span class="input-group-append input-group-addon">
+							<span class="input-group-text">
+								<i class="fa fa-calendar"></i>
+							</span>
+						</span>
+					</div>
+					<input type="hidden" id="fechadesde">
+					<input type="hidden" id="fechahasta">
+							</div>
+							
+				<div class="col-md-2">
+					<label>Denunciado <span><a href="#" onClick="limpiadenunciado();"><i class="fa fa-times" aria-hidden="true"></i></a></span></label>
+					<select class="form-control" id="buscadenunciado"></select>
+					
+				</div>
+				<div class="col-md-2">
+					<label>Denunciante</label>
+					
+					<select class="form-control" id="buscadenunciante"></select>
+				</div>
+				<div class="col-md-2">
+					<label>Agraviado</label>
+					
+					<select class="form-control" id="buscaagraviado"></select>
+				</div>
+				
+				<div class="col-md-2">
+					<label class="text-white">.</label>
+					<button type="button" id="buscaregistros" class="btn btn-primary form-control"><i class="fa fa-search"></i>Buscar</button>
+				</div>
+					</div>
+					</div>
+
+				</div>
+				<div class="table-responsive">
+					<table id="tablaregistros" class="table table-bordered table-hover table-sm">
+						<thead>
+							<tr>
+								<th class="text-center"><i class="fa fa-send" aria-hidden="true"></i></th>
+								<th>N° Documento</th>
+								
+								<th>Fecha Registro</th>
+								<th>Fecha Hecho</th>
+								<th>Ubigeo</th>
+								<th>Clasificacion</th>
+								<th>Procedimiento</th>
+								<th>Comunicación</th>
+								<th class="text-center"><i class="fa fa-users" aria-hidden="true"></i></th>
+								<th class="text-center"><i class="fa fa-edit" aria-hidden="true"></i></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						
+					  </tbody>
+					</table>
+				</div>  
+			</div>
+          
+			
+          </div>
+      </div>
+  </main>
+  <form id="form-odturno" method="post">
+  <input type="hidden" name="id" id="id">
+  </form>
+  <div th:replace="layout/base::gestionapersonalModal"></div>
+  <div th:replace="layout/base::scripts"></div>
+  <script type="text/javascript" th:src="@{/js/customdate.js}"></script>
+  <script th:inline="none">
+  $('#buscadenunciado').select2({
+	  width:'100%',
+	  ajax: {
+		    url: "/restutil/buscadenunciado",
+		    type: "post",
+		    dataType: 'json',
+		    delay: 250,
+		    data: function (params) {
+		      return {
+		        busqueda: params.term, 
+		        page: params.page
+		      };
+		    },
+		    processResults: function (data,params) {
+		    	params.page = params.page || 1;
+	            return {
+	                results: $.map(data, function (item) {
+	                    return {
+	                        text: item[1]+' '+item[2]+' '+item[3],
+	                        id: item[0]
+	                    }
+	                }),
+	                pagination: {
+	                    more: (params.page * 30) < data.total_count
+	                  }
+	            };
+	        },
+		    cache: true
+		  },
+		  placeholder: 'Denunciado',
+		  minimumInputLength: 3
+		});
+  $('#rbcip').on('change',function(){
+		if ($(this).is(':checked')) {
+			
+			 $('#cipBuscado').prop( "disabled", false );
+			 $('#dniBuscado').prop( "disabled", true );
+			 $('#nombreBuscado').prop( "disabled", true );
+			 $('#paternoBuscado').prop( "disabled", true );
+			 $('#maternoBuscado').prop( "disabled", true );
+			 
+			 $('#dniBuscado').val('');
+			 $('#nombreBuscado').val('');
+			 $('#paternoBuscado').val('');
+			 $('#maternoBuscado').val('');
+		  }
+		
+	});
+	$('#rbdni').on('change',function(){
+		if ($(this).is(':checked')) {
+			$('#cipBuscado').prop( "disabled", true );
+			 $('#dniBuscado').prop( "disabled", false );
+			 $('#nombreBuscado').prop( "disabled", true );
+			 $('#paternoBuscado').prop( "disabled", true );
+			 $('#maternoBuscado').prop( "disabled", true );
+			 
+			 $('#cipBuscado').val('');
+			 //$('#dniBuscado').prop( "disabled", false );
+			 $('#nombreBuscado').val('');
+			 $('#paternoBuscado').val('');
+			 $('#maternoBuscado').val('');
+		  }
+		
+	});
+	$('#rbnombre').on('change',function(){
+		if ($(this).is(':checked')) {
+			$('#cipBuscado').prop( "disabled", true );
+			 $('#dniBuscado').prop( "disabled", true );
+			 $('#nombreBuscado').prop( "disabled", false);
+			 $('#paternoBuscado').prop( "disabled", false );
+			 $('#maternoBuscado').prop( "disabled", false );
+			 
+			 $('#cipBuscado').val('');
+			 $('#dniBuscado').val('');
+		  }
+		
+	});
+	$('#tablaPersonalDenunciado').on('click','.deladministrado',function(){
+       	$.post( '/restutil/unsetpersonalpnp', { cip: $(this).attr('data-cip')} ).done(function(data){});
+       	tdenunciado.row( $(this).parents().parents('tr') ).remove().draw(false);
+       	});
+        
+        $('#buscadenuncia').on('click',function(){
+        	
+        	$.post('/restutil/buscadenunciaodturno', { estado: $('#estado option:selected').val(), fechadesde: $('#fechadesde').val(), fechahasta: $('#fechahasta').val()} ).done(function(data){
+    			$('#tablaDenuncias').dataTable().fnClearTable();
+ 				 if(data.length>0){
+ 					 $('#tablaDenuncias').dataTable().fnAddData(data);
+ 				 }
+        	});
+        });
+ 
+  $('#tablaregistros').DataTable({"autoWidth": false,
+	  "createdRow": function( row, data, dataIndex){
+          if( data[6] ==  'SUMARIO'){
+              $(row).addClass('alert alert-danger');
+          }
+      },
+  	  'columns': [{"width": "4%" , 'orderable': false },
+  				  {"width": "10%" , 'orderable': true },
+  				  {"width": "10%" , 'orderable': true },
+  				  {"width": "8%" , 'orderable': true },
+  				{ 'orderable': true },
+	    		null,
+	    		{ "width": "8%" ,'orderable': true },
+	    		{'orderable': true },
+	    		{ 'orderable': false },
+	    		{ 'orderable': false }
+				],
+	    	 "columnDefs": [
+	    		    { className: "align-middle text-center", "targets": [ 0,1,2,3,4,5,6,7,8,9 ] },
+	    		    
+	    		    
+				 
+	    		  ],
+			  "order": [[ 1, "desc" ]]
+	     
+    		  });
+  
+  var tencontrado = $('#tablaPersonalEncontrado').DataTable({
+  	"info":     false,
+	  'columns': [null,
+	    	   null,
+	    	   null,
+	    		null,
+	    		null,
+	    		null,
+	    		{ 'orderable': false }
+	    	 ],
+			  "order": [[ 1, "desc" ]]
+	     
+  		  });
+  var tdenunciado = $('#tablaPersonalDenunciado').DataTable({
+  	"info":     false,
+  	  'columns': [null,
+	    	   null,
+	    	   null,
+	    		null,
+	    		null,
+	    		{ 'orderable': false }
+	    	 ],
+	    	 "columnDefs": [
+	    		    { className: "text-center", "targets": [ 5 ] }
+	    		  ],
+			  "order": [[ 1, "desc" ]]
+	     
+    		  });
+  
+  $('#nuevoregistro').on('click',function(){
+	editaregistro(null);
+  });
+  
+  $('#buscaregistros').on('click',function(){
+	  buscaregistro();
+  });
+  
+  $('#searchPersonal').on('click',function(){
+  	var inputwsValue = $("input[name='inputws']:checked"). val();
+  	var url='/restutil';
+  	switch(inputwsValue){
+  	case '1':
+  		url=url+'/wsmaspoldirticcip';
+  		var cipbuscado = ajustar(7,$('#cipBuscado').val());
+  		$.post( url, { cip: cipbuscado} ).done(function(data){
+  			$('#tablaPersonalEncontrado').dataTable().fnClearTable();
+				 if(data.length>0){
+					 $('#tablaPersonalEncontrado').dataTable().fnAddData(data);
+				 }
+      	});
+  		break;
+  	case '2':
+  		url=url+'/wsmaspoldirticdni';
+  		var dnibuscado = ajustar(7,$('#dniBuscado').val());
+  		$.post( url, { dni: dnibuscado} ).done(function(data){
+  			$('#tablaPersonalEncontrado').dataTable().fnClearTable();
+				 if(data.length>0){
+					 $('#tablaPersonalEncontrado').dataTable().fnAddData(data);
+				 }
+      	});
+  		
+  		break;
+  	case '3':
+  		url=url+'/wsmaspoldirticnpm';
+  		var nombrebuscado = $('#nombreBuscado').val();
+  		var paternobuscado = $('#paternoBuscado').val();
+  		var maternobuscado = $('#maternoBuscado').val();
+  		$.post( url, { nombre: nombrebuscado, paterno: paternobuscado, materno:maternobuscado} ).done(function(data){
+  			$('#tablaPersonalEncontrado').dataTable().fnClearTable();
+				 if(data.length>0){
+					 $('#tablaPersonalEncontrado').dataTable().fnAddData(data);
+				 }
+      	});
+  		break;
+  	}
+  	
+                                                                                                                                                                                                                                                                                                               	
+  });
+  
+  
+  
+  $('#tablaregistros').on('click','.addadministrado',function(){
+	  $.getJSON('/restutil/getdenunciados/'+$(this).attr('data-idreg'),function(data){
+			 $('#tablaPersonalDenunciado').dataTable().fnClearTable();
+			 if(data.length>0){
+				 $('#tablaPersonalDenunciado').dataTable().fnAddData(data);
+			 }
+		});
+	  $('#denunciadosModal').modal('show');
+	 });
+  
+  $('#tablaregistros').on('click','.addagraviado',function(){
+	  alert('agregando agraviados...');
+	 });
+  $('#tablaregistros').on('click','.editregistro',function(){
+	  editaregistro($(this).attr('data-idreg'));
+	 });
+  
+  
+  $('#tablaPersonalEncontrado').on('click','.addadministrado',function(){
+      $.post( '/restutil/setpersonalpnp', { cip: $(this).attr('data-cip')} ).done(function(data){
+  		if(data!='')
+      	tdenunciado.row.add(data).draw( false );
+  		else
+  			alert ('El personal PNP ya se encuentra en la lista');
+  	});
+  }); 
+  $('#saveadministrados').on('click',function(){
+	  $.getJSON('/restutil/saveadministrados',function(Data){
+		  $('#denunciadosModal').modal('hide');
+		  });
+
+	  $('#buscaregistros').click();
+  });
+  
+  $('#tablaregistros').on('click','.guardaregistro',function(){
+	  var idreg= $(this).attr('data-idreg');
+	 	swal({
+    		title: "Esta seguro que desea guardar el Registro? ",
+    		text: "Se le asignara un numero de HT al registro y NO podrá ser modificado!",
+    		type: "info",
+    		showCancelButton: true,
+    		confirmButtonText: "Si, guardar!",
+    		cancelButtonText: "No, cancelar operacion!",
+    		closeOnConfirm: false,
+    		closeOnCancel: false
+    	}, function(isConfirm) {
+    		if (isConfirm) {
+    			guardaregistro(idreg);
+    			swal("Guardada!", "La denuncia fue guardada exitosamente.", "success");
+    			$('#buscaregistros').click();
+    		} else {
+    			swal("Cancelada", "La operacion fue cancelada", "error");
+    		}
+    	});
+    });
+  
+  $('#buscaregistros').click();
+  
+  function buscaregistro(){
+	  $.post('/restutil/listaregistrosodturno', { estado: $('#estado').val(), fechadesde: $('#fechadesde').val(), fechahasta: $('#fechahasta').val()} ).done(function(data){
+			$('#tablaregistros').dataTable().fnClearTable();
+			 if(data.length>0){
+				 $('#tablaregistros').dataTable().fnAddData(data);
+				 $('[data-toggle="tooltip"]').tooltip();  
+			 }
+	});
+	  
+  }
+  function limpiadenunciado(){
+	  $("#buscadenunciado option").remove();
+  }
+  function editaregistro(id){
+	  if(id!=null)
+		  $('#id').val(id);
+	  $("#form-odturno").attr("action","/oficinadisciplina/registro");
+	  $("#form-odturno").submit();
+  }
+  function guardaregistro(idreg){
+	  $.getJSON('/restutil/guardaregistronuevo/'+idreg,function(data){
+		  $('#buscaregistros').click();
+		});
+  }
+  function ajustar(tam, num) {
+		if (num.toString().length <= tam) return ajustar(tam, "0" + num)
+		else return num;
+		}
+  </script>
+</body>
+</html>

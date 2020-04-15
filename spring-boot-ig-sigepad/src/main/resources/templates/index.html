@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+          <div class="tile">
+			  
+          </div>
+      </div>
+  </main>
+  <div th:replace="layout/base::scripts"></div>
+</body>
+</html>

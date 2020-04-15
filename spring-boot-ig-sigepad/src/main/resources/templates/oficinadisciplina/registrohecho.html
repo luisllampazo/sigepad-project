@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+      <form th:action="@{/oficinadisciplina/save}" method="post">
+          <div class="tile">
+			  <div class="tile-title-w-btn line-head">
+				  
+			    <h4 th:text="${expediente.id==null}?'NUEVO REGISTRO':'REGISTRO NRO: '+${expediente.nroexpediente}"></h4>
+				  <div>
+					  <select th:field="${expediente.tipocomunicacion}" class="form-control">
+						  <option th:each="tipocom:${tiposcom}" th:value="${tipocom.id}" th:text="${tipocom.nombre}" th:attr="data-docexterno=(${tipocom.docexterno}?1:0)"></option>
+					  </select>
+				  </div>
+				  <div>
+					  <input th:field="${expediente.fechaexpediente}" class="form-control text-center" type="text" readonly>
+				  </div>
+			  </div>
+            <div class="tile-body">
+				<div class="container-fluid">
+					<div id="infonoregular" class="collapse row line-head mb-3" style="display:">
+						<div class="col-md-2">
+							<label>Nro de Documento</label>
+							<div class="input-group mb-3">
+								<input type="text" class="form-control" placeholder="#####">
+  								<input type="text" class="form-control input-group-append" placeholder="2020">
+						  
+</div>
+						</div>
+						<div class="col-md-3">
+							<label>Siglas</label>
+							<input class="form-control text-uppercase">
+						</div>
+						<div class="col-md-2">
+							<label>Fecha</label>
+							<input class="form-control">
+						</div>
+						<div class="col-md-5">
+							<label>Archivo</label>
+							<input type="file" class="form-control">
+						</div>
+					</div>
+					<div th:object="${denunciante}" class="row line-head">
+					
+					<div class="col-12 mb-1"><label class="font-weight-bold">DENUNCIANTE</label></div>
+					
+				  <div class="col-md-2">
+						<label>
+							Documento de Identidad
+						</label>
+						<select th:field="*{docidentidad}" class="form-control">
+						<option th:each="docident:${docsidentidad}" th:value="${docident.id}" th:text="${docident.nombre}" th:attr="data-size=${docident.nrocaracteres}"></option>
+						</select>
+					</div>
+				  <div class="col-md-2">
+						<label>Nro Documento</label>
+					  <div class="input-group mb-3">
+  <input th:field="*{nrodocidentidad}" type="text" class="form-control" placeholder="########">
+  <input th:field="*{cip}" type="hidden">
+						  <button type="button" class="input-group-append btn btn-primary"><i class="fa fa-search m-0"></i></button>
+</div>
+						
+					</div>
+					<div class="col-md-2">
+					  <label>Nombres</label>
+					  <input type="text" class="form-control"/>
+				  </div>
+					<div class="col-md-2">
+					  <label>Apellido Paterno</label>
+					  <input type="text" class="form-control"/>
+				  </div>
+					<div class="col-md-2">
+					  <label>Materno</label>
+					  <input type="text" class="form-control"/>
+				  </div>
+					<div class="col-md-2">
+					  <label>Origen</label>
+					  <input type="text" class="form-control" value="POLICIAL" readonly/>
+				  </div>
+				  
+				</div>
+					<div class="row" th:object="${expediente}">
+					<input type="hidden" th:field="*{id}">
+					<input type="hidden" th:field="*{nroexpediente}">
+						<div class="col-12 mt-3 mb-1"><label class="font-weight-bold">HECHOS</label></div>
+						<div class="col-md-3 my-2">
+							<label>Ubicación</label>
+							<select th:field="*{ubigeohecho}" class="form-control">
+							<option th:if="*{ubigeohecho}" th:value="*{ubigeohecho.id}" th:text="*{ubigeohecho.nombre}"></option>	
+							</select>
+						</div>
+						<div class="col-md-3 my-2">
+							<label>Jurisdiccion Policial</label>
+							<select th:field="*{jurisdiccionpolicial}" class="form-control">
+								<option value="">NINGUNA</option>
+								<option th:each="comisaria:${comisarias}" th:value="${comisaria.id}" th:text="${comisaria.nombre}"></option>
+							</select>
+						</div>
+						<div class="col-md-6 my-2">
+							<label>Dirección / Referencia</label>
+							<input th:field="*{direccionhecho}" class="form-control"/>
+						</div>
+						<div class="col-12 my-3 pb-2">
+							<label>Descripcion de los Hechos</label>
+							<textarea  th:field="*{descripcionhecho}" class="form-control" rows="6"></textarea>
+						</div>
+						<div class="col-md-2">
+							<label>Fecha del Hecho</label>
+							<input id="fechahorahecho" th:field="*{fechahecho}" class="form-control text-center" readonly/>
+						</div>
+						<div class="col-md-2">
+						
+							<label><input type="checkbox" id="timePicker"> Hora del Hecho</label>
+							<input type="text" th:field="*{horahecho}" class="form-control text-center" readonly/>
+						</div>
+						<div class="col-md-2">
+							<label>Clasificacion</label>
+							<select th:field="*{clasificacion}" class="form-control">
+							<option th:each="clasehecho:${claseshecho}" th:value="${clasehecho.id}" th:text="${clasehecho.nombre}"></option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label>Legislacion</label>
+							<select th:field="*{legislacion}" class="form-control">
+								<option th:each="ley:${leyes}" th:value="${ley.id}" th:text="${ley.nombre}"></option>
+							</select>
+						</div>
+						<div class="col-md-2">
+							<label>Geolocalizacion</label>
+							<input class="form-control"/>
+						</div>
+						<div class="col-md-2">
+							<label>Tipo Procedimiento</label>
+							<select th:field="*{tipoprocedimiento}" class="form-control">
+								<option th:each="tipo:${tiposproc}" th:value="${tipo.id}" th:text="${tipo.nombre}"></option>
+							</select>
+						</div>
+						<div class="col-12 my-2">
+							<label>Información para identificación</label>
+							<textarea th:field="*{infoidentificacion}" class="form-control" rows="4"></textarea>
+						</div>
+						<div class="col-12 my-2">
+							<label>Mas Clasificaciones</label>
+							<select th:field="*{clasehecho}" class="form-control" multiple>
+							<option th:each="clasehecho:${claseshecho}" th:value="${clasehecho.id}" th:text="${clasehecho.nombre}"></option>
+							</select>
+						</div>
+					</div>
+				</div>
+				
+		    </div>
+			  <div class="tile-footer">
+							<div class="row">
+								<div class="col text-right">
+								<a class="btn btn-secondary" th:href="@{/oficinadisciplina/odturno}">Cancelar</a>
+								<button type="submit" class="btn btn-primary">Guardar
+						Cambios</button>
+								</div>
+							</div>
+			</div>
+          </div>
+          </form>
+      </div>
+  </main>
+  <div th:replace="layout/base::scripts"></div>
+  <script th:inline="none">
+  $('#ubigeohecho').on('change',function(){
+			$.getJSON('/restutil/lstcomisarias/'+$(this).val(),function(data){
+			$("#jurisdiccionpolicial option").remove();
+			 $("#jurisdiccionpolicial").append('<option value="">NINGUNA</option>');
+		     $.each(data, function(i,item){
+				$("#jurisdiccionpolicial").append('<option value="'+item.id+'">'+item.nombre+'</option>');
+		     });
+		 });		
+	});
+  $('#clasehecho').select2({
+ 		width: '100%'			
+ 	});
+  $('#fechaexpediente').daterangepicker({
+	    "singleDatePicker": true,
+	    "showDropdowns": true,
+	    "locale": {
+	        "direction": "ltr",
+	        "format": "DD/MM/YYYY",
+	        "separator": " - ",
+	        "applyLabel": "Seleccionar",
+	        "cancelLabel": "Cancelar",
+	        "fromLabel": "From",
+	        "toLabel": "To",
+	        "customRangeLabel": "Custom",
+	        "daysOfWeek": [
+	            "Do",
+	            "Lu",
+	            "Ma",
+	            "Mi",
+	            "Ju",
+	            "Vi",
+	            "Sa"
+	        ],
+	        "monthNames": [
+	            "Enero",
+	            "Febrero",
+	            "Marzo",
+	            "Abril",
+	            "Mayo",
+	            "Junio",
+	            "Julio",
+	            "Agosto",
+	            "Septiembre",
+	            "Octubre",
+	            "Noviembre",
+	            "Diciembre"
+	        ],
+	        "firstDay": 1
+	    }
+	});
+
+  $('#timePicker').on('change',function(){
+	  updatefechahora();
+  });
+  $('#ubigeohecho').select2({
+	  width:'100%',
+	  ajax: {
+		    url: "/restutil/buscaubigeo",
+		    type: "post",
+		    dataType: 'json',
+		    delay: 250,
+		    data: function (params) {
+		      return {
+		        busqueda: params.term, 
+		        page: params.page
+		      };
+		    },
+		    processResults: function (data,params) {
+		    	params.page = params.page || 1;
+	            return {
+	                results: $.map(data, function (item) {
+	                    return {
+	                        text: item.nombre,
+	                        id: item.id
+	                    }
+	                }),
+	                pagination: {
+	                    more: (params.page * 30) < data.total_count
+	                  }
+	            };
+	        },
+		    cache: true
+		  },
+		  placeholder: 'Ubicacion de los Hecho',
+		  minimumInputLength: 3
+		});
+  
+	$('#tipocomunicacion').on('change',function(){
+		if($('#tipocomunicacion option:selected').attr('data-docexterno')==0)
+		$('#infonoregular').collapse('hide');
+		else
+			$('#infonoregular').collapse('show');
+			
+	});
+  
+  
+  updatefechahora();
+  showhidedocext();
+  
+  function showhidedocext(){
+	  if($('#tipocomunicacion option:selected').attr('data-docexterno')==0)
+			$('#infonoregular').collapse('hide');
+			else
+				$('#infonoregular').collapse('show');
+  }
+  function updatefechahora(){
+	  var options = {
+			    "singleDatePicker": true,
+			    "showDropdowns": true,
+			    "timePicker24Hour": true,
+			    "locale": {
+			        "direction": "ltr",
+			        "format": "DD/MM/YYYY",
+			        "separator": " - ",
+			        "applyLabel": "Seleccionar",
+			        "cancelLabel": "Cancelar",
+			        "fromLabel": "From",
+			        "toLabel": "To",
+			        "customRangeLabel": "Custom",
+			        "daysOfWeek": [
+			            "Do",
+			            "Lu",
+			            "Ma",
+			            "Mi",
+			            "Ju",
+			            "Vi",
+			            "Sa"
+			        ],
+			        "monthNames": [
+			            "Enero",
+			            "Febrero",
+			            "Marzo",
+			            "Abril",
+			            "Mayo",
+			            "Junio",
+			            "Julio",
+			            "Agosto",
+			            "Septiembre",
+			            "Octubre",
+			            "Noviembre",
+			            "Diciembre"
+			        ],
+			        "firstDay": 1
+			    }
+	  };
+	  if ($('#timePicker').is(':checked'))
+		  options.timePicker = true;
+
+		  
+	  $('#fechahorahecho').daterangepicker(options, function(start, end, label) {
+		  if ($('#timePicker').is(':checked'))
+		  $('#horahecho').val(start.format('HH:mm'));
+		});	
+  }
+  
+  </script>
+</body>
+</html>
