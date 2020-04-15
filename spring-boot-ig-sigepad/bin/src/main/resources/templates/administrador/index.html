@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::admin-app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+            <div class="info">
+              <h4>uSUARIOS</h4>
+              <p><b>5/10</b> Conectados</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-4">
+          <div class="widget-small warning coloured-icon"><i class="icon fa fa-pencil-square-o fa-3x"></i>
+            <div class="info">
+              <h4>corrección de datos</h4>
+              <p><b>0/0</b> Atendidos</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="widget-small danger coloured-icon"><i class="icon fa fa-ticket fa-3x"></i>
+            <div class="info">
+              <h4>requerimiento soporte</h4>
+              <p><strong>500/10000</strong> Atendidos</p>
+            </div>
+          </div>
+        </div>
+      </div>
+          <div class="tile">
+			  
+          </div>
+      </div>
+  </main>
+  <div th:replace="layout/base::scripts"></div>
+</body>
+</html>

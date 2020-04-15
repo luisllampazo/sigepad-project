@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+          <div class="tile">
+			  <div class="tile-title-w-btn line-head">
+			  <h3 class="title"><em th:classappend="${clasetile}" aria-hidden="true"></em> 
+			    <label th:text="${titulotile}"> </label>
+			  </h3>
+			  
+			</div>
+			<div class="tile-body">
+			<div class="card mb-4">
+				
+					<div class="card-body">
+						<div class="row">
+						<div class="col-md-2">
+							<label>Estado</label>
+							<select  id="estado" class="form-control">
+								<option value="1" selected>ACTIVOS</option>
+								<option value="2">TERMINADOS</option>
+								<option value="3">TODOS</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+					<label>Desde - Hasta</label>
+					<div class="input-group" id="fechaGroup">
+						<input type="text" class="form-control rangofecha text-center" id="rangohechos" name="fechadesde" readonly>
+						<span class="input-group-append input-group-addon">
+							<span class="input-group-text">
+								<i class="fa fa-calendar"></i>
+							</span>
+						</span>
+					</div>
+					<input type="hidden" id="fechadesde">
+					<input type="hidden" id="fechahasta">
+							</div>
+							
+				<div class="col-md-2">
+					<label>Denunciado <span><a href="#" onClick="limpiadenunciado();"><i class="fa fa-times" aria-hidden="true"></i></a></span></label>
+					<select class="form-control" id="buscadenunciado"></select>
+					
+				</div>
+				<div class="col-md-2">
+					<label>Denunciante</label>
+					
+					<select class="form-control" id="buscadenunciante"></select>
+				</div>
+				<div class="col-md-2">
+					<label>Agraviado</label>
+					
+					<select class="form-control" id="buscaagraviado"></select>
+				</div>
+				
+				<div class="col-md-2">
+					<label class="text-white">.</label>
+					<button type="button" id="buscaregistros" class="btn btn-primary form-control"><i class="fa fa-search"></i>Buscar</button>
+				</div>
+					</div>
+					</div>
+
+				</div>
+				<div class="table-responsive">
+					<table id="tablaregistros" class="table table-bordered table-hover table-sm">
+						<thead>
+							<tr>
+								<th class="text-center"><i class="fa fa-eye" aria-hidden="true"></i></th>
+								<th>N° Documento</th>
+								<th>Exp / Inv</th>
+								<th>Fecha Hecho / Inicio PAD</th>
+								<th>Clasificacion</th>
+								<th>Etapas</th>
+								<th>Prescripcion</th>
+								<th>Caducidad</th>
+								<th>Tipo</th>
+								<th>Responsables</th>
+								<th class="text-center"><i class="fa fa-edit" aria-hidden="true"></i></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td><button class="btn btn-info btn-sm" data-toggle="tooltip" title="ver informacion de seguimiento"><i class="fa fa-eye m-0"></i></button></td>	
+							<td>20204212321</td> 
+							<td>INVESTIGACION</td>
+							<td>12/02/2020</td>
+							<td><label class="badge badge-info">VIOLENCIA FAMILIAR</label></td>
+							<td><label class="badge badge-info">ACCIONES PREVIAS</label> <label class="badge badge-info">PEDIDO DE INFORMACION</label></td>
+							<td><label class="badge badge-info">SIN INFORMACION</label></td>
+							<td></td>
+							<td><label class="badge badge-primary">ORDINARIO</label></td>
+							<td><small class="badge">AUX: ST3 LOPEZ ALDANA JORGE LUIS</small><br>
+							<small class="badge">INST: CMDT PEREZ BENAVIDES MARCO</small>
+							</td>
+							<td>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Administrados"><i class="fa fa-users m-0"></i></button>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Documentacion Generada"><i class="fa fa-files-o m-0"></i></button>
+							</td>
+						</tr>
+						<tr>
+							<td><button class="btn btn-info btn-sm" data-toggle="tooltip" title="ver informacion de seguimiento"><i class="fa fa-eye m-0"></i></button></td>	
+							<td>20204212321</td> 
+							<td>INVESTIGACION</td>
+							<td>12/02/2020</td>
+							<td><label class="badge badge-info">VIOLENCIA FAMILIAR</label></td>
+							<td><label class="badge badge-info">ACCIONES PREVIAS</label> <label class="badge badge-info">PEDIDO DE INFORMACION</label></td>
+							<td><label class="badge badge-info">SIN INFORMACION</label></td>
+							<td></td>
+							<td><label class="badge badge-primary">ORDINARIO</label></td>
+							<td><small class="badge">AUX: ST3 LOPEZ ALDANA JORGE LUIS</small><br>
+							<small class="badge">INST: CMDT PEREZ BENAVIDES MARCO</small>
+							</td>
+							<td>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Administrados"><i class="fa fa-users m-0"></i></button>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Documentacion Generada"><i class="fa fa-files-o m-0"></i></button>
+							</td>
+						</tr>
+						<tr>
+							<td><button class="btn btn-info btn-sm" data-toggle="tooltip" title="ver informacion de seguimiento"><i class="fa fa-eye m-0"></i></button></td>	
+							<td>20204212321</td> 
+							<td>INVESTIGACION</td>
+							<td>12/02/2020</td>
+							<td><label class="badge badge-info">VIOLENCIA FAMILIAR</label></td>
+							<td><label class="badge badge-info">ACCIONES PREVIAS</label> <label class="badge badge-info">PEDIDO DE INFORMACION</label></td>
+							<td><label class="badge badge-info">SIN INFORMACION</label></td>
+							<td></td>
+							<td><label class="badge badge-primary">ORDINARIO</label></td>
+							<td><small class="badge">AUX: ST3 LOPEZ ALDANA JORGE LUIS</small><br>
+							<small class="badge">INST: CMDT PEREZ BENAVIDES MARCO</small>
+							</td>
+							<td>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Administrados"><i class="fa fa-users m-0"></i></button>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Documentacion Generada"><i class="fa fa-files-o m-0"></i></button>
+							</td>
+						</tr>
+						<tr>
+							<td><button class="btn btn-info btn-sm" data-toggle="tooltip" title="ver informacion de seguimiento"><i class="fa fa-eye m-0"></i></button></td>	
+							<td>20204212321</td> 
+							<td>INVESTIGACION</td>
+							<td>12/02/2020</td>
+							<td><label class="badge badge-info">VIOLENCIA FAMILIAR</label></td>
+							<td><label class="badge badge-info">ACCIONES PREVIAS</label> <label class="badge badge-info">PEDIDO DE INFORMACION</label></td>
+							<td><label class="badge badge-info">SIN INFORMACION</label></td>
+							<td></td>
+							<td><label class="badge badge-primary">ORDINARIO</label></td>
+							<td><small class="badge">AUX: ST3 LOPEZ ALDANA JORGE LUIS</small><br>
+							<small class="badge">INST: CMDT PEREZ BENAVIDES MARCO</small>
+							</td>
+							<td>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Administrados"><i class="fa fa-users m-0"></i></button>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Documentacion Generada"><i class="fa fa-files-o m-0"></i></button>
+							</td>
+						</tr>
+						<tr>
+							<td><button class="btn btn-info btn-sm" data-toggle="tooltip" title="ver informacion de seguimiento"><i class="fa fa-eye m-0"></i></button></td>	
+							<td>20204212321</td> 
+							<td>INVESTIGACION</td>
+							<td>12/02/2020</td>
+							<td><label class="badge badge-info">VIOLENCIA FAMILIAR</label></td>
+							<td><label class="badge badge-info">ACCIONES PREVIAS</label> <label class="badge badge-info">PEDIDO DE INFORMACION</label></td>
+							<td><label class="badge badge-info">SIN INFORMACION</label></td>
+							<td></td>
+							<td><label class="badge badge-danger">SUMARIO</label></td>
+							<td><small class="badge">AUX: ST3 LOPEZ ALDANA JORGE LUIS</small><br>
+							<small class="badge">INST: CMDT PEREZ BENAVIDES MARCO</small>
+							</td>
+							<td>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Administrados"><i class="fa fa-users m-0"></i></button>
+							<button class="btn btn-info btn-sm" data-toggle="tooltip" title="Documentacion Generada"><i class="fa fa-files-o m-0"></i></button>
+							</td>
+						</tr>
+					  </tbody>
+					</table>
+				</div>  
+			</div>
+          </div>
+      </div>
+  </main>
+  <div th:replace="layout/base::scripts"></div>
+   <script type="text/javascript" th:src="@{/js/customdate.js}"></script>
+   <script th:inline="none">
+   $('#tablaregistros').DataTable({"autoWidth": false,
+	  	  'columns': [{"width": "4%" , 'orderable': false },
+	  				  {"width": "10%" , 'orderable': true },
+	  				  {"width": "10%" , 'orderable': true },
+	  				  {"width": "8%" , 'orderable': true },
+	  				{ 'orderable': true },
+		    		{'orderable': true },
+		    		{'orderable': true },
+		    		{'orderable': true },
+		    		{'orderable': true },
+		    		{ 'orderable': false },
+		    		{ 'orderable': false }
+					],
+		    	 "columnDefs": [
+		    		    { className: "align-middle text-center", "targets": [ 0,1,2,3,4,5,6,7,8,9 ] },
+		    		    
+		    		    
+					 
+		    		  ],
+				  "order": [[ 1, "desc" ]]
+		     
+	    		  });
+   </script>
+</body>
+</html>

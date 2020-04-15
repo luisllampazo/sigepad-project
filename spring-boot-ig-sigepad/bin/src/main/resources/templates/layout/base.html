@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+	<meta name="description" content="SIGEPAD es un sistema informático creado por la UNITIC IGPNP para el seguimiento de los Procesos Administrativos Disciplinarios">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/icofont.min.css}">
+	<!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<title>SIGEPAD - IGPNP</title>
+</head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:fragment="header" class="app-header"><a class="app-header__logo" href="index.html">SIGEPAD</a>
+      <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+      <ul class="app-nav">
+        
+        <!--Notification Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+        </li>
+        <!-- User Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" th:href="@{/administrador}"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
+            <li><a class="dropdown-item" th:href="@{/usuarios/perfil}"><i class="fa fa-user fa-lg"></i> Perfil</a></li>
+            <li><a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out fa-lg"></i> Cerrar sesion</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:fragment="app-sidebar" class="app-sidebar">
+		<div class="text-center">
+		<img id="imguser" class="app-sidebar__user-avatar img-fluid m-0 px-5" th:src="@{/img/usuariodefault.png}" alt="User Image">
+      </div>
+      <div class="app-sidebar__user">
+		<div style="width: 100%" class="text-center">
+		  <p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuario.grado}"></p>
+	      <p class="app-sidebar__user-name" th:text="${session.usuario.getApellidosNombres()}"></p>
+		  <p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuario.cargo.nombre}"></p>
+			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuario.unidadorganica.nombre}"></p>
+			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuario.unidadorganica.sede}"></p>
+		  
+        </div>
+      </div>
+      <ul class="app-menu">
+        <li><a class="app-menu__item" th:classappend="${active == 'resumen'}?'active'" th:href="@{/}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Resumen</span></a></li>
+        <li sec:authorize="hasRole('ROLE_ODT') or hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'odturno'}?'active'" th:href="@{/oficinadisciplina/odturno}"><em class="app-menu__icon icofont-police"></em><span class="app-menu__label">OD Turno</span></a></li>
+        <li sec:authorize="hasRole('ROLE_UTD') or hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'tramite'}?'active'" th:href="@{/secretaria/utd}"><i class="app-menu__icon fa fa-files-o"></i><span class="app-menu__label">Tramite Documentario</span></a></li>
+		<li sec:authorize="hasRole('ROLE_SECINV') or hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'secdirinv'}?'active'" th:href="@{/dirinv/secretaria}"><em class="app-menu__icon icofont-businessman"></em><span class="app-menu__label">Secretaría DIRINV</span></a></li>
+		<li sec:authorize="hasRole('ROLE_JEFOD') or hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'jefod'}?'active'" th:href="@{/oficinadisciplina/jefatura}"><i class="app-menu__icon icofont-businessman"></i><span class="app-menu__label">Monitoreo Expedientes</span></a></li>
+		<li sec:authorize="hasRole('ROLE_SECOD') or hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'secod'}?'active'" th:href="@{/oficinadisciplina/secretaria}"><em class="app-menu__icon icofont-businessman"></em><span class="app-menu__label">Secretaría OD</span></a></li>
+		<li sec:authorize="hasRole('ROLE_CEOPOL') or hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'ceopol'}?'active'" th:href="@{/ceopol/notasinformativas}"><i class="app-menu__icon icofont-police-cap"></i><span class="app-menu__label">CEOPOL IGPNP</span></a></li>
+        <li sec:authorize="hasRole('ROLE_AUX') or hasRole('ROLE_INST') or hasRole('ROLE_ADMIN')" class="treeview"><a class="app-menu__item" th:classappend="${active == 'odinvestiga'}?'active':(${active == 'odexpediente'}?'active')" href="#" data-toggle="treeview"><i class="app-menu__icon icofont-investigation"></i><span class="app-menu__label">Procesos AD</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a  class="treeview-item" th:classappend="${active == 'odinvestiga'}?'active'" th:href="@{/oficinadisciplina/investigaciones}"><i class="icon fa fa-circle-o"></i> Investigaciones</a></li>
+            <li><a class="treeview-item" th:classappend="${active == 'odexpediente'}?'active'" th:href="@{/oficinadisciplina/expedientes}"><i class="icon fa fa-circle-o"></i> Expedientes</a></li>
+            
+          </ul>
+        </li>
+        <li></li>
+      </ul>
+    </aside>
+    
+    
+    
+    
+    <aside th:fragment="admin-app-sidebar" class="app-sidebar">
+		<div class="text-center">
+		<img id="imguser" class="app-sidebar__user-avatar img-fluid m-0 px-5" th:src="@{/img/usuario.png}" alt="User Image">
+      </div>
+      <div class="app-sidebar__user">
+		<div style="width: 100%" class="text-center">
+		  <p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuario.grado}"></p>
+	      <p class="app-sidebar__user-name" th:text="${session.usuario.getApellidosNombres()}"></p>
+		  <p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuario.cargo.nombre}"></p>
+			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuario.unidadorganica.nombre}"></p>
+			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuario.unidadorganica.sede}"></p>
+		  
+        </div>
+      </div>     
+      <ul class="app-menu">
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a  class="app-menu__item" th:classappend="${active == 'resumen'}?'active'" th:href="@{/administrador}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Resumen</span></a></li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'usuarios'}?'active'" th:href="@{/administrador/usuarios}"><em class="app-menu__icon fa fa-users"></em><span class="app-menu__label">Usuarios</span></a></li>
+		<li sec:authorize="hasRole('ROLE_ADMIN')" class="treeview"><a class="app-menu__item" th:classappend="${active == 'master'}?'active'" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Tablas Maestras</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>
+          </ul>
+        </li>
+		<li sec:authorize="hasRole('ROLE_ADMIN')" class="treeview"><a class="app-menu__item" th:classappend="${active == 'iad'}?'active'" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-files-o"></i><span class="app-menu__label">Investigaciones AD</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="form-components.html"><i class="icon fa fa-circle-o"></i> Form Components</a></li>
+          </ul>
+        </li>
+       <li sec:authorize="hasRole('ROLE_ADMIN')"><a class="app-menu__item" th:classappend="${active == 'resumen'}?'active'" th:href="@{/admin/estadistica}"><i class="app-menu__icon fa fa-pie-chart"></i><span class="app-menu__label">Estadística</span></a></li>
+      </ul>
+    </aside>
+    <main class="app-content">
+      <div th:fragment="app-title" class="app-title">
+        <div>
+          <h1><em th:classappend="${claseicono}" class=""></em> <label th:text="${tituloprincipal}"></label></h1>
+          <p th:text="${descripcionprincipal}"></p>
+        </div>
+        <ul  class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li th:each="breadcrumb:${breadcrumbs}" class="breadcrumb-item"><a th:if="${breadcrumb[0]!=null}"  th:href="${breadcrumb[0]}" th:text="${breadcrumb[1]}"></a> <label th:if="${breadcrumb[0]==null}"  th:text="${breadcrumb[1]}"></label> </li>
+
+        </ul>
+      </div>
+      <div class="container-fluid">
+          <div class="tile">
+			  
+          </div>
+      </div>
+      <div th:fragment="scripts">
+      <script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/main.js}"></script>
+		<script th:src="@{/js/plugins/pace.min.js}"></script>
+		<script th:src="@{/js/plugins/jquery.tablesorter.min.js}"></script>
+		<script th:src="@{/js/plugins/jquery.quicksearch.js}"></script>
+		<script th:src="@{/js/plugins/jquery.dataTables.min.js}"></script>
+		<script th:src="@{/js/plugins/dataTables.bootstrap.min.js}"></script>
+		<script th:src="@{/js/plugins/select2.min.js}"></script>
+		<script th:src="@{/js/plugins/moment.min.js}"></script>
+		<script th:src="@{/js/plugins/bootstrap-datetimepicker.min.js}"></script>
+		<script th:src="@{/js/plugins/jquery.mask.min.js}"></script>
+		<script th:src="@{/js/plugins/bootstrap-notify.min.js}"></script>
+    	<script th:src="@{/js/plugins/sweetalert.min.js}"></script>
+    	<script th:src="@{/js/plugins/bootstrap-filestyle.min.js}"></script>
+    	<script th:src="@{/js/plugins/chart.js}"></script>
+    	<script th:src="@{/js/plugins/daterangepicker.js}"></script>
+      </div>
+  </main>
+  
+  <div th:fragment="gestionapersonalModal"  class="modal fade" data-backdrop="static" data-keyboard="false"  id="denunciadosModal" tabindex="-1" role="dialog" aria-labelledby="denunciadosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="denunciadosModalLabel">Denunciados</h5>
+                      
+                    </div>
+                    <div class="modal-body">
+						<div class="container">
+                      	<div class="row mb-2">
+							<div class="col-md-2">
+								<div class="animated-radio-button small">
+              <label>
+                <input type="radio" name="inputws" id="rbcip" value="1" checked><span class="label-text">CIP</span>
+              </label>
+            </div>
+								<input id="cipBuscado" class="form-control form-control-sm"/>
+							</div>
+							<div class="col-md-2">
+								<div class="animated-radio-button small">
+              <label>
+                <input type="radio" id="rbdni" name="inputws" value="2"><span class="label-text">DNI</span>
+              </label>
+            </div>
+								<input id="dniBuscado" name="inputws"class="form-control form-control-sm" disabled/>
+							</div>
+							<div class="col-md-2">
+								<div class="animated-radio-button small">
+              <label>
+                <input type="radio" id="rbnombre" name="inputws" value="3"><span class="label-text">Nombre</span>
+              </label>
+            </div>
+								<input id="nombreBuscado" class="form-control form-control-sm text-uppercase" disabled/>
+							</div>
+							<div class="col-md-2">
+								<label class="small">Apellido Paterno</label>
+								<input id="paternoBuscado" class="form-control form-control-sm text-uppercase" disabled/>
+							</div>
+							<div class="col-md-2">
+								<label class="small">Apellido Materno</label>
+								<input id="maternoBuscado" class="form-control form-control-sm text-uppercase" disabled/>
+							</div>
+<div class="col-md-2">
+			  <label class="text-white">.</label>
+								<button id="searchPersonal" class="btn btn-primary form-control form-control-sm"><em class="fa fa-search" aria-hidden="true"></em>Buscar</button>
+							</div>
+							
+							
+						</div>
+						
+						<div class="row mb-2"> </div>
+	
+							<div class="row mb-2">
+						 	<div class="col-md-12">
+								PERSONAL ENCONTRADO
+							</div>
+						</div>
+						<div class="row">
+						 	<div class="col-md-12 table-responsive border rounded p-3 mb-2">
+							  <table id="tablaPersonalEncontrado" class="table table-bordered small table-hover table-striped table-sm">
+									<thead>
+										<tr>
+											<th>CIP</th>
+											<th>DNI</th>
+											<th>GRADO</th>
+											<th>APELLIDOS Y NOMBRES</th>
+											<th>UNIDAD</th>
+											<th>SITUACION</th>
+											<th class="text-center"><em class="fa fa-level-down" aria-hidden="true"></em></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+						<div class="row my-2">
+						 	<div class="col-md-12">
+								PERSONAL DENUNCIADO
+							</div>
+						</div>
+							<div class="row">
+						 	<div class="col-md-12 table-responsive border rounded p-3 mb-2">
+							  <table id="tablaPersonalDenunciado" class="table table-bordered small table-hover table-striped table-sm">
+									<thead>
+										<tr>
+											<th>CIP</th>
+											<th>DNI</th>
+											<th>GRADO</th>
+											<th>APELLIDOS Y NOMBRES</th>
+											<th>UNIDAD</th>
+											<th class="text-center"><em class="fa fa-level-up" aria-hidden="true"></em></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+					  </div>
+                    </div>
+                    <div class="modal-footer">
+                    
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                      <button id="saveadministrados" class="btn btn-info" type="button" data-dismiss="modal">Registrar</button>
+                      <a class="btn btn-primary" th:href="@{/oficinadisciplina/saveadministrados}">Registrar</a>
+                    </div>
+                  </div>
+                </div>
+</div>
+
+<div th:fragment="modalht" class="modal fade" data-backdrop="static" data-keyboard="false"
+		id="modalht" tabindex="-1" role="dialog"
+		aria-labelledby="htModalLabel" aria-hidden="true">
+		<div class="modal-dialog " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="denunciadosModalLabel">Hoja de
+						Trámite - SIGE MININTER</h5>
+				</div>
+				<form id="form-addht" th:action="@{/secretaria/saveht}"
+					method="post">
+					<div class="modal-body">
+						<div class="container">
+							<div class="row mb-2">
+
+								<div class="col-md-5">
+									<label>Nro de Ht</label> 
+									<input id="denuncia_id" name="denuncia_id" type="hidden" /> 
+									<input id="nroht" name="nroht" type="text" class="form-control " />
+								</div>
+								<div class="col-md-7">
+									<label>Fecha de Ht</label>
+									<div class="input-group" id="fechaHtGroup">
+										<input id="fechaht" name="fechaht" type="text" class="form-control" readonly>
+										<span class="input-group-append input-group-addon"> <span
+											class="input-group-text"> <i class="fa fa-calendar"></i>
+										</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label class="text-white">.</label>
+
+								</div>
+
+
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancelar</button>
+						<button type="button" id="guardaht" class="btn btn-primary">
+							<em class="fa fa-check" aria-hidden="true"></em>Agregar
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div th:fragment="modalresponsables" class="modal fade" data-backdrop="static" data-keyboard="false"  id="responsablesModal" tabindex="-1" role="dialog" aria-labelledby="responsablesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="responsablesModalLabel">Instructor / Auxiliar</h5>
+                      
+                    </div>
+                    <form th:action="@{/od/updatedecreto}" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+						<div class="container">
+						<div class="row line-head">
+							<div class="col-md-6">
+								<h5>Instructor</h5>
+								<input class="form-control" type="text" id="ninstructor" readonly
+									/>
+							</div>
+							<div class="col-md-6">
+								<h5>Auxiliar</h5>
+								<input class="form-control" type="text" id="nauxiliar" readonly
+									/>
+								
+							</div>
+						</div>
+						<div class="row mt-3">
+						<div class="col-12"><label>DECRETO</label></div>
+							<div class="col-md-8">
+								
+									
+										<div class="input-group">
+						<div class="input-group-prepend">
+    <span class="input-group-text " id="inputGroup-sizing-sm"><i class="fa fa-file-text"></i></span>
+  </div>
+                        <input class="form-control" id="nrodecreto" name="nrodecreto" type="text" placeholder="0001-2020">
+                        <div class="input-group-append"><span class="input-group-text">OD14-DIRINV-IGPNP</span></div>
+                      </div>
+								
+							</div>
+							<div class="col-md-4">
+							<div class="input-group" id="fechaDecreto">
+						<input type="text" name="fechadecreto" class="form-control date" maxlength="10">
+						<span class="input-group-append input-group-addon">
+							<span class="input-group-text">
+								<i class="fa fa-calendar"></i>
+							</span>
+						</span>
+					</div>
+							</div>
+							</div>
+
+						<div class="row mt-3">
+							<div class="col-md-11">
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i
+											class="fa fa-cloud-upload"></i></span>
+									</div>
+									<div class="custom-file" id="customFileDecreto">
+										<input type="hidden" id="idden" name="idden"/>
+										<input type="file" class="custom-file-input" id="fileDecreto" name="filedecreto">
+										<label class="custom-file-label" for="customFile">Selecciona un archivo</label>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-1">
+								<button class="btn btn-danger" disabled>
+									<span class="fa fa-trash"></span>
+								</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+                      <button class="btn btn-primary" type="submit">Guardar</button>
+                </div>
+                </form>
+                  </div>
+                </div>
+</div>
+<div th:fragment="modaldesignaod" class="modal fade" data-backdrop="static" data-keyboard="false"
+		id="modaldesignaod" tabindex="-1" role="dialog"
+		aria-labelledby="derivarODModalLabel" aria-hidden="true">
+		<div class="modal-dialog " role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="derivarODModalLabel">Derivar Denuncia</h5>
+				</div>
+					<div class="modal-body">
+						<div class="container">
+							<div class="row mb-2">
+
+								<div class="col-md-12">
+									<label>Registrado por:</label> 
+									<input id="denuncia_id_send" name="denuncia_id" type="hidden" />
+									<input id="odreg_id" name="odreg_id" type="hidden" />  
+									<input id="odRegistra" name="odRegistra" type="text" class="form-control" readonly/>
+								</div>
+								</div>
+								<div class="row mb-2">
+								<div class="col-md-6">
+									<label>Fecha de Registro</label>
+									<div class="input-group" id="fechaHtGroup">
+										<input id="fechareg" name="fechareg" type="text" class="form-control" readonly>
+										<span class="input-group-append input-group-addon"> <span
+											class="input-group-text"> <i class="fa fa-calendar"></i>
+										</span>
+										</span>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<label>Fecha Hecho</label>
+									<div class="input-group" id="fechaHtGroup">
+										<input id="fechahecho" name="fechahecho" type="text" class="form-control" readonly>
+										<span class="input-group-append input-group-addon"> <span
+											class="input-group-text"> <i class="fa fa-calendar"></i>
+										</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="row mb-2">
+								<div class="col-12">
+									<div class="animated-checkbox">
+										<label> <input id="checkotraod" name="checkotraod" type="checkbox"><span
+											class="label-text">Derivar a otra OD</span>
+										</label>
+									</div>
+								</div>
+								<div class="col-12">
+									<select id="organodisc" name="odder_id" class="form-control" disabled>
+									<option th:each="organo:${organosdisc}" th:value="${organo.id}" th:utext="${organo.nombre}"></option>
+									</select>
+								</div>
+							</div>
+
+
+
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-secondary" type="button"
+							data-dismiss="modal">Cancelar</button>
+						<button id="btnderivaod" type="button" class="btn btn-primary">
+							<em class="fa fa-check" aria-hidden="true"></em>Derivar
+						</button>
+					</div>
+			</div>
+		</div>
+	</div>
+  
+  
+</body>
+</html>

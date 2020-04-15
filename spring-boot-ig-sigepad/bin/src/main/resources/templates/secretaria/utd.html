@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+          <div class="tile">
+			  <div class="tile-title-w-btn line-head">
+			  <h3 class="title"><em th:classappend="${clasetile}" aria-hidden="true"></em> 
+			    <label th:text="${titulotile}"> </label>
+			  </h3>
+			  
+			</div>
+			<div class="tile-body">
+			<div class="card mb-4">
+				
+					<div class="card-body">
+						<div class="row">
+						<div class="col-md-2">
+							<label>Estado</label>
+							<select  id="estado" class="form-control">
+								<option value="1" selected>PENDIENTES</option>
+								<option value="2">RECIBIDOS</option>
+								<option value="3">ATENDIDOS</option>
+								<option value="4">TODOS</option>
+							</select>
+						</div>
+						<div class="col-md-2">
+					<label>Desde - Hasta</label>
+					<div class="input-group" id="fechaGroup">
+						<input type="text" class="form-control rangofecha text-center" id="rangohechos" name="fechadesde" readonly>
+						<span class="input-group-append input-group-addon">
+							<span class="input-group-text">
+								<i class="fa fa-calendar"></i>
+							</span>
+						</span>
+					</div>
+					<input type="hidden" id="fechadesde">
+					<input type="hidden" id="fechahasta">
+							</div>
+							
+				<div class="col-md-2">
+					<label>Denunciado <span><a href="#" onClick="limpiadenunciado();"><i class="fa fa-times" aria-hidden="true"></i></a></span></label>
+					<select class="form-control" id="buscadenunciado"></select>
+					
+				</div>
+				<div class="col-md-2">
+					<label>Denunciante</label>
+					
+					<select class="form-control" id="buscadenunciante"></select>
+				</div>
+				<div class="col-md-2">
+					<label>Agraviado</label>
+					
+					<select class="form-control" id="buscaagraviado"></select>
+				</div>
+				
+				<div class="col-md-2">
+					<label class="text-white">.</label>
+					<button type="button" id="buscaregistros" class="btn btn-primary form-control"><i class="fa fa-search"></i>Buscar</button>
+				</div>
+					</div>
+					</div>
+
+				</div>
+				<div class="table-responsive">
+					<table id="tablaregistros" class="table table-bordered table-hover table-sm">
+						<thead>
+							<tr>
+								<th class="text-center"><i class="fa fa-send" aria-hidden="true"></i></th>
+								<th>N° Documento</th>
+								
+								<th>Fecha Registro</th>
+								<th>Fecha Hecho</th>
+								<th>Ubigeo</th>
+								<th>Clasificacion</th>
+								<th>Comunicación</th>
+								<th>Fecha Enviado/Recibido</th>
+								<th class="text-center"><i class="fa fa-edit" aria-hidden="true"></i></th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						
+					  </tbody>
+					</table>
+				</div>  
+			</div>
+			
+          </div>
+      </div>
+  </main>
+  <div th:replace="layout/base::modalht"></div>
+  <div th:replace="layout/base::scripts"></div>
+  <script type="text/javascript" th:src="@{/js/customdate.js}"></script>
+  <script type="text/javascript" th:src="@{/js/managedocs.js}"></script>
+  <script type="text/javascript" th:src="@{/js/modalht.js}"></script>
+  <script type="text/javascript" th:inline="none">
+  $('#buscaregistros').on('click',function(){
+	  buscaegistros();
+  });
+  
+  $('#tablaregistros').DataTable({"autoWidth": false,
+  	  'columns': [{"width": "4%" , 'orderable': false },
+  				  {"width": "10%" , 'orderable': true },
+  				  {"width": "10%" , 'orderable': true },
+  				  {"width": "8%" , 'orderable': true },
+  				{ 'orderable': true },
+	    		{ "width": "8%" ,'orderable': true },
+	    		{'orderable': true },
+	    		{ 'orderable': false },
+	    		{ 'orderable': false }
+				],
+	    	 "columnDefs": [
+	    		    { className: "align-middle text-center", "targets": [ 0,1,2,3,4,5,6,7,8 ] },
+	    		    
+	    		    
+				 
+	    		  ],
+			  "order": [[ 1, "desc" ]]
+	     
+    		  });
+  
+  
+  
+  
+  $('#buscaregistros').click();
+  function buscaegistros(){
+	  $.post('/restutil/listaregistrosutd', { estado: $('#estado').val(), fechadesde: $('#fechadesde').val(), fechahasta: $('#fechahasta').val()} ).done(function(data){
+			$('#tablaregistros').dataTable().fnClearTable();
+			 if(data.length>0){
+				 $('#tablaregistros').dataTable().fnAddData(data);
+				 $('[data-toggle="tooltip"]').tooltip();  
+			 }
+	});
+	  
+  }
+  function recibedocumento(idreg){
+	  $.getJSON('/restutil/recibedocutd/'+idreg,function(data){
+		  $('#buscaregistros').click();
+		});
+}
+  
+  </script>
+</body>
+</html>

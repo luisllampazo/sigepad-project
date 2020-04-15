@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<meta charset="utf-8">
+<head th:replace="layout/base::head"></head>
+<body class="app sidebar-mini rtl">
+    <!-- Navbar-->
+    <header th:replace="layout/base::header"></header>
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/base::admin-app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/base::app-title"></div>
+      <div class="container-fluid">
+      <div class="tile">
+			<div class="tile-title-w-btn">
+			<h3>Lista de Usuarios</h3>
+			<button class="btn btn-primary">Crear Usuario</button>
+			  </div>
+			  <div class="tile-body">
+			  	<div class="row">
+					<div class="col-12 table-responsive">
+						<table id="tablausuarios" class="table table-bordered table-striped table-hover table-sm">
+						<thead>
+							<tr>
+								<th><i class="fa fa-pencil"></i></th>
+								<th>Usuario</th>
+								<th>Estado</th>
+								<th>Grado</th>
+								<th>Apellidos y Nombres</th>
+								<th>Cargo</th>
+								<th>Roles</th>
+								<th><i class="fa fa-pencil-square-o"></i></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:each="usuario:${usuarios}" >
+								<td><button class="btn btn-sm btn-primary"> <i class="fa fa-pencil mx-0"></i></button></td>
+								<td th:text="${usuario.cip}"></td>
+								<td th:text="(${usuario.users.enabled})?'Activo':'Deshabilitado'" th:class="(${!usuario.users.enabled})?'text-danger'"></td>
+								<th th:text="${usuario.grado}"></th>
+								<td th:text="${usuario.getApellidosNombres()}"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			  </div>
+          </div>
+      </div>
+  </main>
+  <div th:replace="layout/base::scripts"></div>
+  <script th:inline="none">
+  $('#tablausuarios').DataTable({
+	  'columns': [
+			{ 'orderable': false },
+			null,
+	    	null,
+	    	null,
+	    	null,
+	    	null,
+	    	null,
+	    	{ 'orderable': false }
+	    ],
+	    "columnDefs": [
+	    		    { className: "text-center align-middle", "targets": [ 0,1,2,3,4,5,6,7 ] }
+	    		  ],
+		"order": [[ 2, "asc" ]]
+});
+  //$.getJSON('/restusuario/lstusuarios',function(data){
+	//  $('#tablausuarios').dataTable().fnAddData(data);
+	  //});
+
+  </script>
+</body>
+</html>
