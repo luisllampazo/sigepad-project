@@ -4,6 +4,6 @@ public class InvestigacionAdministrado {
 
 	private Long id;
 	private Investigacion investigacion;
-	private Administrado administrado;
+
 	
 }

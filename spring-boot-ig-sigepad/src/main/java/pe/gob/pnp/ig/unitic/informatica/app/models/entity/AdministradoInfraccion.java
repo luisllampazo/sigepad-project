@@ -19,7 +19,7 @@ public class AdministradoInfraccion implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Administrado administrado;
+	private Persona administrado;
 	@ManyToOne (fetch = FetchType.LAZY)
 	private Infraccion infraccion;
 	@ManyToOne (fetch = FetchType.LAZY)
@@ -34,12 +34,7 @@ public class AdministradoInfraccion implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Administrado getPersonalinvestigado() {
-		return administrado;
-	}
-	public void setPersonalinvestigado(Administrado personalinvestigado) {
-		this.administrado = personalinvestigado;
-	}
+	
 	public Infraccion getInfraccion() {
 		return infraccion;
 	}
@@ -64,12 +59,7 @@ public class AdministradoInfraccion implements Serializable{
 	public void setSanciona(Boolean sanciona) {
 		this.sanciona = sanciona;
 	}
-	public Administrado getAdministrado() {
-		return administrado;
-	}
-	public void setAdministrado(Administrado administrado) {
-		this.administrado = administrado;
-	}
+	
 	public OldInvestigacion getInvestigacion() {
 		return investigacion;
 	}

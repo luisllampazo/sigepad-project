@@ -18,7 +18,7 @@ public class AdministradoMedidapreventiva {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Administrado administrado;
+	private Persona administrado;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private OldInvestigacion investigacion;
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -43,12 +43,7 @@ public class AdministradoMedidapreventiva {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Administrado getAdministrado() {
-		return administrado;
-	}
-	public void setAdministrado(Administrado administrado) {
-		this.administrado = administrado;
-	}
+	
 	public OldInvestigacion getInvestigacion() {
 		return investigacion;
 	}

@@ -85,7 +85,7 @@ public class Expediente implements Serializable{
 	
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="expediente_id")
-	private List<Administrado> administrados;
+	private List<Persona> administrados;
 	@OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="expediente_id")
 	private List<Persona> agraviados;
@@ -101,9 +101,6 @@ public class Expediente implements Serializable{
 	private Boolean endirinv = false; //activo o terminado
 	private Boolean activo = true; //activo o terminado
 
-	public Expediente() {
-		 administrados = new ArrayList<Administrado>();
-	}
 	public Long getId() {
 		return id;
 	}
@@ -263,15 +260,7 @@ public class Expediente implements Serializable{
 		this.hojadetramite = hojadetramite;
 	}
 
-	public List<Administrado> getAdministrados() {
-		return administrados;
-	}
-
-	public void setAdministrados(List<Administrado> administrados) {
-		this.administrados = administrados;
-	}
-
-
+	
 	public Date getFecharegistro() {
 		return fecharegistro;
 	}
