@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Parentesco;
+
 @Entity
 public class ComunicacionAgraviado implements Serializable{
 	

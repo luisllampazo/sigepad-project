@@ -12,6 +12,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Infraccion;
+
 @Entity
 @Table(name = "clasehecho")
 public class Clasehecho implements Serializable {

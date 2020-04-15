@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.gob.pnp.ig.unitic.informatica.app.models.dao.ILegislacionDao;
-import pe.gob.pnp.ig.unitic.informatica.app.models.entity.Legislacion;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Legislacion;
 
 @Service
 public class LegislacionServiceImpl implements ILegislacionService{

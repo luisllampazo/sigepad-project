@@ -1,4 +1,4 @@
-package pe.gob.pnp.ig.unitic.informatica.app.models.entity;
+package pe.gob.pnp.ig.unitic.informatica.app.models.entity.master;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,7 +15,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.TipoInfraccion;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.AdministradoInfraccion;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.Clasehecho;
 
 @Entity
 public class Infraccion implements Serializable {

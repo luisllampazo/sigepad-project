@@ -18,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Jurisdiccion;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Legislacion;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Ubigeo;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.Personal;
 
@@ -64,9 +65,6 @@ public class Comunicacion implements Serializable {
 	
 	@Column(columnDefinition="TEXT")
 	private String infoidentificacion;
-	
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Denunciante denunciante;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -150,12 +148,6 @@ public class Comunicacion implements Serializable {
 	}
 	public void setInfoidentificacion(String infoidentificacion) {
 		this.infoidentificacion = infoidentificacion;
-	}
-	public Denunciante getDenunciante() {
-		return denunciante;
-	}
-	public void setDenunciante(Denunciante denunciante) {
-		this.denunciante = denunciante;
 	}
 	public Date getCreateAt() {
 		return createAt;

@@ -14,6 +14,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Complejidad;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.Personal;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.UnidadOrganica;
 

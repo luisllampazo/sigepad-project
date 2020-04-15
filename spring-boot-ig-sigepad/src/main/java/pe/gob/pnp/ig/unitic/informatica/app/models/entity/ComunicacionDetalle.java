@@ -29,6 +29,33 @@ public class ComunicacionDetalle implements Serializable{
 	private Comunicacion comunicacion;
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private TipoProcedimiento tipoprocedimiento;
+	
+	//DATOS HT
+	private String numeroht;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date fechaHt;
+	private Personal personalht;
+	
+	
+	public String getNumeroht() {
+		return numeroht;
+	}
+	public void setNumeroht(String numeroht) {
+		this.numeroht = numeroht;
+	}
+	public Date getFechaHt() {
+		return fechaHt;
+	}
+	public void setFechaHt(Date fechaHt) {
+		this.fechaHt = fechaHt;
+	}
+	public Personal getPersonalht() {
+		return personalht;
+	}
+	public void setPersonalht(Personal personalht) {
+		this.personalht = personalht;
+	}
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date appendedAt;

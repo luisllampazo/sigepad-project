@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Grado;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.TipoInvolucrado;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.UnidadPNP;
 
 @Entity
 public class ComunicacionInvolucrado implements Serializable{

@@ -1,4 +1,4 @@
-package pe.gob.pnp.ig.unitic.informatica.app.models.entity;
+package pe.gob.pnp.ig.unitic.informatica.app.models.entity.master;
 
 import java.io.Serializable;
 
@@ -16,6 +16,7 @@ public class Complejidad implements Serializable{
 	private Long id;
 	private String nombre;
 	private String descripcion;
+	private boolean enabled;
 	public Long getId() {
 		return id;
 	}
@@ -33,6 +34,12 @@ public class Complejidad implements Serializable{
 	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 }

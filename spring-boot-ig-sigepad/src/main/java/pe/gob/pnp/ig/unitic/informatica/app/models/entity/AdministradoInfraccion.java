@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Infraccion;
+
 @Entity
 @Table(name="administradoinfraccion")
 public class AdministradoInfraccion implements Serializable{

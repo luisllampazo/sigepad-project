@@ -1,6 +1,7 @@
 package pe.gob.pnp.ig.unitic.informatica.app.models.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.springframework.format.annotation.DateTimeFormat;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.Personal;
-import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.UnidadOrganica;
+
 
 @Entity
 public class Investigacion implements Serializable{
@@ -23,8 +26,11 @@ public class Investigacion implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Comunicacion comunicacion;
 	private String nroexpediente; //Null si no se genera expediente
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private UnidadOrganica unidadinvestiga;
-	private Personal auxiliar;
-	private Personal instructor;
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date createdAt;
+	private Personal createdBy;
+	
+
+
 }

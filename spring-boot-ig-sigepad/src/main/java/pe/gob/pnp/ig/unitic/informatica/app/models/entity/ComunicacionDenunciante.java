@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Parentesco;
+
 @Entity
 public class ComunicacionDenunciante implements Serializable {
 

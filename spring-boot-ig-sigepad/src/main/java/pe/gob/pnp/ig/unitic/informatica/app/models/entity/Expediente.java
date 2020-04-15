@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Jurisdiccion;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Legislacion;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.TipoComunicacion;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.TipoProcedimiento;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Ubigeo;
@@ -67,7 +68,7 @@ public class Expediente implements Serializable{
 	private List<Clasehecho> clasehecho;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Denunciante denunciante;
+	private Persona denunciante;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private TipoProcedimiento tipoprocedimiento;
@@ -209,14 +210,6 @@ public class Expediente implements Serializable{
 
 	public void setClasehecho(List<Clasehecho> clasehecho) {
 		this.clasehecho = clasehecho;
-	}
-
-	public Denunciante getDenunciante() {
-		return denunciante;
-	}
-
-	public void setDenunciante(Denunciante denunciante) {
-		this.denunciante = denunciante;
 	}
 
 

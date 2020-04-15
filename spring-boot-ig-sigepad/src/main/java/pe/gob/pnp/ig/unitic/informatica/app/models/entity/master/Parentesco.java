@@ -1,4 +1,4 @@
-package pe.gob.pnp.ig.unitic.informatica.app.models.entity;
+package pe.gob.pnp.ig.unitic.informatica.app.models.entity.master;
 
 import java.io.Serializable;
 

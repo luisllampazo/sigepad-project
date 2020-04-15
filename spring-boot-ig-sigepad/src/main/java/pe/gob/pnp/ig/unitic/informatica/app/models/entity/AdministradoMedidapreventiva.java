@@ -12,6 +12,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Medidapreventiva;
+
 @Entity
 public class AdministradoMedidapreventiva {
 	@Id
