@@ -12,7 +12,7 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="unidad_pnp")
+@Table(name="unidadpnp")
 public class UnidadPNP implements Serializable{
 
 	private static final long serialVersionUID = 1L;

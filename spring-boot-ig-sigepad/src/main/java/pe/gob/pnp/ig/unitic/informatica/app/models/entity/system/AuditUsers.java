@@ -26,7 +26,7 @@ public class AuditUsers implements Serializable {
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private User user;
+	private Usuario user;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -48,10 +48,10 @@ public class AuditUsers implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public User getUser() {
+	public Usuario getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 	public Date getConecteddate() {

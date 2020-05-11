@@ -17,6 +17,7 @@ public class TipoDocIdentidad implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
+	private String abrev;
 	private String descripcion;
 	private Integer nrocaracteres;
 	private boolean enabled;
@@ -49,6 +50,12 @@ public class TipoDocIdentidad implements Serializable{
 	}
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+	public String getAbrev() {
+		return abrev;
+	}
+	public void setAbrev(String abrev) {
+		this.abrev = abrev;
 	}
 	
 	

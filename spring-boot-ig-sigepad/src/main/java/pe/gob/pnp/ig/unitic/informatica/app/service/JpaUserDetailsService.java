@@ -17,14 +17,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.gob.pnp.ig.unitic.informatica.app.models.dao.IUserDao;
+import pe.gob.pnp.ig.unitic.informatica.app.models.dao.IUsuarioDao;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.Role;
+import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.Usuario;
 
 @Service("jpaUserDetailsService")
 public class JpaUserDetailsService implements UserDetailsService{
 
 	@Autowired
-	private IUserDao userDao;
+	private IUsuarioDao userDao;
 	
 	private Logger logger = LoggerFactory.getLogger(JpaUserDetailsService.class);
 	
@@ -32,33 +33,33 @@ public class JpaUserDetailsService implements UserDetailsService{
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
-		pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.User user = userDao.findByUsername(username);
+		Usuario usuario = userDao.findByUsername(username);
 		
-		if(user==null) {
+		if(usuario==null) {
 			logger.error("No existe el Usuario "+username);
 			throw new UsernameNotFoundException("Username "+username+" no existe");
 		}
-		if(!user.isEnabled())
+		if(!usuario.isEnabled())
 		{
 			logger.error("El Usuario "+username+" no esta habilitado");
 			throw new UsernameNotFoundException("Usuario "+username+" no habilitado");
 		}
-		if(user.isConected())
+		if(usuario.isConected())
 		{
 			logger.error("El Usuario "+username+" ya se encuentra conectado");
 			throw new UsernameNotFoundException("Usuario "+username+" conectado");
 		}
 		
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getRoles());
+		List<GrantedAuthority> authorities = buildUserAuthority(usuario.getRoles());
 
-		return buildUserForAuthentication(user, authorities);
+		return buildUserForAuthentication(usuario, authorities);
 	}
 	
-	private User buildUserForAuthentication(pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.User user, 
+	private User buildUserForAuthentication(Usuario usuario, 
 			List<GrantedAuthority> authorities) {
 				
-			    String username = user.getUsername();
-			    String password = user.getPassword();
+			    String username = usuario.getUsername();
+			    String password = usuario.getPassword();
 			    boolean enabled = true;
 			    boolean accountNonExpired = true;
 			    boolean credentialsNonExpired = true;

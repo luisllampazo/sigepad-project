@@ -19,6 +19,7 @@ public class UnidadOrganica implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
+	private String abrev;
 	private String sede;
 	private String siglas;
 	
@@ -73,5 +74,13 @@ public class UnidadOrganica implements Serializable{
 
 	public void setTipounidad(TipoUnidad tipounidad) {
 		this.tipounidad = tipounidad;
+	}
+
+	public String getAbrev() {
+		return abrev;
+	}
+
+	public void setAbrev(String abrev) {
+		this.abrev = abrev;
 	}
 }

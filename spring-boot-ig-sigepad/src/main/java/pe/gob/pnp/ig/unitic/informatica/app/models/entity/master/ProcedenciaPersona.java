@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tipopersona") //procedencia, civil, policial, militar etc
-public class TipoPersona {
+@Table(name = "procedenciapersona") //procedencia, civil, policial, militar, civil (EX PNP), militar (EX FA)
+public class ProcedenciaPersona {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.gob.pnp.ig.unitic.informatica.app.models.dao.IUsuarioDao;
+import pe.gob.pnp.ig.unitic.informatica.app.models.dao.IPersonalDao;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.Personal;
 @Service
 public class UsuarioServiceImpl implements IUsuarioService{
 	
 	@Autowired
-	private IUsuarioDao usuarioDao;
+	private IPersonalDao usuarioDao;
 	@Override
 	public Personal findByCip(String cip) {
 

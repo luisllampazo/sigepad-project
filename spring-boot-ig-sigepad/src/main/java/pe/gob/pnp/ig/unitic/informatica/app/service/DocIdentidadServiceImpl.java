@@ -13,9 +13,6 @@ public class DocIdentidadServiceImpl implements IDocIdentidadService{
 	@Autowired
 	private IDocIdentidadDao docidentidadDao;
 	
-	@Override
-	public List<TipoDocIdentidad> findByHabilitado(Boolean habilitado) {
-		return docidentidadDao.findByHabilitado(habilitado);
-	}
+	
 
 }
