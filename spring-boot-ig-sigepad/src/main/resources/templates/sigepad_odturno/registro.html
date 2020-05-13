@@ -203,6 +203,7 @@
         </div>
       </div>
     </main>
+    
     <div th:replace="layout/sigepad_layout::js-essential"></div>
     <div th:replace="layout/sigepad_layout::js-additional"></div>
     <script th:inline="none">
@@ -217,7 +218,8 @@
 	});
 	$('.select-tag').select2({
 		tags: true,
-		tokenSeparators: [',', ' ']
+		tokenSeparators: [',', ' '],
+		width: '100%' 
 	})
     </script>
   </body>

@@ -82,7 +82,7 @@
 	     	<p class="app-sidebar__user-name"><small th:text="${session.usuarionombre}"></small></p>
 		 	<p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuariocargo}"></p>
 			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuariounidad}"></p>
-			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuariosede}"></p>
+			
 		  
         </div>
       </div>
@@ -109,12 +109,12 @@
           </ul>
         </li>
         
-      	<li sec:authorize="hasRole('ROLE_OD')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-folder-o"></em><span class="app-menu__label">Oficina de Disciplina</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+      	<li sec:authorize="hasRole('ROLE_OD')" class="treeview" th:classappend="${active == 'odjefatura'}?'is-expanded':(${active == 'odsecretaria'}?'is-expanded':(${active == 'odinvestigaciones'}?'is-expanded':(${active == 'odexpedientes'}?'is-expanded')))"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-folder-o"></em><span class="app-menu__label">Oficina de Disciplina</span><em class="treeview-indicator fa fa-angle-right"></em></a>
           <ul class="treeview-menu">
-          	<li sec:authorize="hasRole('ROLE_JEFOD')"><a class="treeview-item" th:href="@{/od/jefatura}"><i class="icon fa fa-circle-o"></i> Jefatura</a></li>
-            <li sec:authorize="hasRole('ROLE_SECOD')"><a class="treeview-item" th:href="@{/od/secretaria}"><i class="icon fa fa-circle-o"></i> Secretaría</a></li>
-            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:href="@{/od/investigaciones}"><i class="icon fa fa-circle-o"></i> Investigaciones</a></li>
-            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:href="@{/od/expedientes}"><i class="icon fa fa-circle-o"></i> Expedientes</a></li>
+          	<li sec:authorize="hasRole('ROLE_JEFOD')"><a class="treeview-item" th:classappend="${active == 'odjefatura'}?'active'" th:href="@{/od/jefatura}"><i class="icon fa fa-circle-o"></i> Jefatura</a></li>
+            <li sec:authorize="hasRole('ROLE_SECOD')"><a class="treeview-item" th:classappend="${active == 'odsecretaria'}?'active'" th:href="@{/od/secretaria}"><i class="icon fa fa-circle-o"></i> Secretaría</a></li>
+            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:classappend="${active == 'odinvestigaciones'}?'active'" th:href="@{/od/investigaciones}"><i class="icon fa fa-circle-o"></i> Investigaciones</a></li>
+            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:classappend="${active == 'odexpedientes'}?'active'" th:href="@{/od/expedientes}"><i class="icon fa fa-circle-o"></i> Expedientes</a></li>
           </ul>
         </li>
         <li sec:authorize="hasRole('ROLE_REP')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-bar-chart"></em><span class="app-menu__label">Reportes</span><em class="treeview-indicator fa fa-angle-right"></em></a>

@@ -107,7 +107,7 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
 					</div>
 					  <div class="row mb-3">
 						  <div class="col-12 table-responsive">
-						  	  <table id="table-denuncias" class="table table-sm table-bordered table-hover">
+						  	  <table id="table-registros" class="table table-sm table-bordered table-hover">
 								  <thead>
 									  <tr>
 										  <th><i class="fa fa-plane"></i></th>
@@ -142,7 +142,7 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
 									  </tr>
 									  <tr  class="alert-success">
 										  <td>
-										    <button class="btn btn-info btn-sm btn-info-table"><i class="fa fa-info m-0"></i></button>
+										    <button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Registro creado el 10/05/2020 11:35:25" data-original-title="Informacion de Registro"><i class="fa fa-info  m-0"></i></button>
 										  </td>
 										  <td>20200125465</td>
 										  <td>Denuncia Regular</td>
@@ -152,7 +152,7 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
 										  <td>Ebriedad</td>
 										  <td> Procesada</td>
 										  <td>
-										    <button class="btn btn-info btn-sm btn-ver-table"><i class="fa fa-eye m-0"></i></button>
+										    <button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye m-0"></i></button>
 											<button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
 											<button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
 											<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print"></i></button>
@@ -171,7 +171,7 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
 										  <td>Ebriedad</td>
 										  <td>Nuevo</td>
 										  <td>
-											  <button class="btn btn-info btn-sm btn-ver-table"><i class="fa fa-eye m-0"></i></button>
+											  <button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye m-0"></i></button>
 											  <button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
 											  <button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
 										  </td>
@@ -195,7 +195,7 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
 									  </tr>
 									  <tr class="alert-success">
 										  <td>
-										    <button class="btn btn-info btn-sm btn-info-table"><i class="fa fa-info m-0"></i></button>
+										    <button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Informacion adicional agregada el 10/05/2020 11:35:25" data-original-title="Informacion de Registro"><i class="fa fa-info  m-0"></i></button>
 										  </td>
 										  <td>20200125465</td>
 										  <td>Nota Informativa</td>
@@ -205,7 +205,7 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
 										  <td>Ebriedad</td>
 										  <td> Procesada</td>
 										  <td>
-										    <button class="btn btn-info btn-sm btn-ver-table"><i class="fa fa-eye m-0"></i></button>
+										    <button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye m-0"></i></button>
 											  <button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
 											  <button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
 											  <button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print"></i></button>
@@ -221,25 +221,109 @@ Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
         </div>
       </div>
     </main>
+    <div th:replace="layout/sigepad_modal::modalDetalleRegistro"></div>
     <div th:replace="layout/sigepad_layout::js-essential"></div>
     <div th:replace="layout/sigepad_layout::js-additional"></div>
     <script th:inline="none">
-    $('#table-denuncias').DataTable({
+    $('.btn-guardar-table').tooltip({title:'Guardar'});
+	  $('.btn-info-table').tooltip({title:'Información'});
+	  $('.btn-recibir-table').tooltip({title:'Recibir documento externo'});
+	  
+	  $('.btn-editar-table').tooltip({title:'Modificar'});
+	  $('.btn-denunciado-table').tooltip({title:'Denunciados'});
+	  $('.btn-agraviado-table').tooltip({title:'Agraviados'});
+	  $('.btn-eliminar-table').tooltip({title:'Eliminar'});
+	  $('.btn-detalle-table').tooltip({title:'Ver'});
+	  $('.btn-imprimir-table').tooltip({title:'Imprimir'});
+	  
+	  $('#table-registros tbody').on('click','.btn-denunciado-table',function(){
+		  $('#denunciadoModal').modal('show');
+	  });
+	  $('#table-registros tbody').on('click','.btn-agraviado-table',function(){
+		  $('#modalAgraviado').modal('show');
+	  });
+	  
+	  $('#table-registros tbody').on('click','.btn-eliminar-table',function(){
+	swal({
+		title: "¿Está seguro?",
+		text: "No podrá recuperar el actual registro!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Si, eliminar!",
+		cancelButtonText: "No, cancelar!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Eliminado!", "El registro fue eliminado.", "success");
+		} else {
+			swal("Cancelado", "La eliminacion fue cancelada", "error");
+		}
+	});
+});
+	  
+	$('#table-registros tbody').on('click','.btn-guardar-table',function(){
+	swal({
+		title: "¿Está seguro?",
+		text: "El registro sera ingresado para su atención y no podrá ser modificado!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Si, guardar!",
+		cancelButtonText: "No, cancelar!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("Guardado!", "El registro fue guardado exitosamente.", "success");
+		} else {
+			swal("Cancelado", "El registro no fue guardado", "error");
+		}
+	});
+});
+
+$('#table-registros tbody').on('click','.btn-recibir-table',function(){
+	swal({
+		title: "¿Está seguro?",
+		text: "Se recibira el documento externo para su clasificacion!",
+		type: "warning",
+		showCancelButton: true,
+		confirmButtonText: "Si, recibir!",
+		cancelButtonText: "No, cancelar!",
+		closeOnConfirm: false,
+		closeOnCancel: false
+	}, function(isConfirm) {
+		if (isConfirm) {
+			swal("recibido!", "El registro fue recibido.", "success");
+		} else {
+			swal("Cancelado", "El registro no fue recibido", "error");
+		}
+	});
+});
+	  
+	$('#table-registros').DataTable({
 		'columns': [{ 'orderable': false },
-    	   null,
-    	   null,
-    		null,
+  	   null,
+  	   null,
+  		null,
 			null,
-    		null,
-    		null,
-    		null,
-    		{ 'orderable': false }
-    	 ],
+  		null,
+  		null,
+  		null,
+  		{ 'orderable': false }
+  	 ],
 		"order": [[ 1, "desc" ]],
 		"columnDefs": [
-    		    { className: "text-center", "targets": [ 0,1,2,3,4,5,6,7,8 ] }
-    		  ]
+  		    { className: "text-center", "targets": [ 0,1,2,3,4,5,6,7,8 ] }
+  		  ]
 	});
+	  	$('[data-toggle="popover"]').popover({
+trigger: 'focus'
+});
+	  $('#table-registros tbody').on('click','.btn-detalle-table',function(){
+	$('#modalInfoRegistro').modal('show');
+	$('#modalInfoRegistro .modal-dialog .modal-content').css("background-image","url(/images/imagecip.png)","background-color: rgba(0,0,0,0.8)");
+
+});
     </script>
   </body>
 </html>

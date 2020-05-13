@@ -107,7 +107,7 @@
 					<div class="row">
 						<div class="col-12">
 						<div class="table-responsive">
-					<table class="table table-sm table-bordered">
+					<table id="table-registros" class="table table-sm table-bordered table-hover">
 						<thead>
 							<tr class="text-center">
 								<th><i class="fa fa-send-o"></i></th>
@@ -121,8 +121,8 @@
 								<th class="text-center"><i class="fa fa-pencil-square-o"></i></th>
 							</tr>
 						</thead>
-						<tbody>
-							<tr style="background-color: #E8FBEC" class="text-center">
+						<tbody class="text-center">
+							<tr>
 								<td><button class="btn btn-primary btn-sm btn-procesar-table"><i class="fa fa-paper-plane  m-0"></i></button></td>
 								<td>Denuncia Regular</td>
 								<td>20200001</td>
@@ -133,13 +133,14 @@
 								<td>Recibido</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
-									<button class="btn btn-secondary btn-sm btn-archivar-table"><i class="fa fa-folder-o  m-0"></i></button>
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
+									<button class="btn btn-secondary btn-sm btn-archivar-table"><i class="fa fa-file-archive-o m-0"></i></button>
 									
 								</td>
 							</tr>
-							<tr class="text-info text-center" style="background-color: #E8FBEC">
-								<td></td>
+							<tr class="text-info alert-success">
+								<td><button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Registro Enviado el 10/05/2020 11:35:25" data-original-title="Informacion de Envío"><i class="fa fa-info  m-0"></i></button>
+								</td>
 								<td>Denuncia Regular</td>
 								<td>20200001</td>
 								<td>08/05/2020</td>
@@ -149,11 +150,11 @@
 								<td>Atendido</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
 								</td>
 							</tr>
-							<tr class="text-danger text-center" style="background-color: #E8FBEC;">
-								<td></td>
+							<tr class="alert-success text-danger">
+								<td><button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Registro Archivado el 09/05/2020 20:55:25" data-original-title="Informacion de Archivo"><i class="fa fa-info  m-0"></i></button></td>
 								<td>Denuncia Regular</td>
 								<td>20200001</td>
 								<td>08/05/2020</td>
@@ -163,11 +164,11 @@
 								<td>Archivado</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
 								</td>
 							</tr>
-							<tr style="background-color: #FFF7D7" class="text-center">
-								<td></td>
+							<tr class="alert-warning">
+								<td><button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Registro ingresado por CEOPOL  el 11/05/2020 01:20:54" data-original-title="Informacion de Registro"><i class="fa fa-info  m-0"></i></button></td>
 								<td>Nota Informativa</td>
 								<td>20204001</td>
 								<td>08/05/2020</td>
@@ -177,11 +178,10 @@
 								<td>Registrado</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
-									
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
 								</td>
 							</tr>
-							<tr style="background-color: #FFF7D7" class="text-center">
+							<tr class="alert-warning text-reset">
 								<td><button class="btn btn-primary btn-sm btn-procesar-table"><i class="fa fa-paper-plane  m-0"></i></button></td>
 								<td>Nota Informativa</td>
 								<td>20204001</td>
@@ -192,13 +192,13 @@
 								<td>Recibido</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
-									<button class="btn btn-secondary btn-sm btn-archivar-table"><i class="fa fa-folder-o  m-0"></i></button>
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
+									<button class="btn btn-secondary btn-sm btn-archivar-table"><i class="fa fa-file-archive-o m-0"></i></button>
 									
 								</td>
 							</tr>
-							<tr class="text-info text-center" style="background-color: #FFF7D7">
-								<td></td>
+							<tr class="text-info alert-success">
+								<td><button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Registro Enviado el 10/05/2020 11:35:25" data-original-title="Informacion de Envío"><i class="fa fa-info  m-0"></i></button></td>
 								<td>Nota Informativa</td>
 								<td>20200001</td>
 								<td>08/05/2020</td>
@@ -208,11 +208,11 @@
 								<td>Atendido</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
 								</td>
 							</tr>
-							<tr class="text-danger text-center" style="background-color: #FFF7D7">
-								<td></td>
+							<tr class="text-danger text-center alert-warning">
+								<td><button class="btn btn-info btn-sm btn-info-table" data-container="body" data-toggle="popover" data-content="Registro Archivado el 09/05/2020 20:55:25" data-original-title="Informacion de Archivo"><i class="fa fa-info  m-0"></i></button></td>
 								<td>Nota Informativa</td>
 								<td>20200001</td>
 								<td>08/05/2020</td>
@@ -222,7 +222,7 @@
 								<td>Archivado</td>
 								<td class="text-center">
 									<button class="btn btn-info btn-sm btn-detalle-table"><i class="fa fa-eye  m-0"></i></button>
-									<button class="btn btn-info btn-sm btn-ruta-table"><i class="fa fa-file-text-o  m-0"></i></button>
+									<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print  m-0"></i></button>
 								</td>
 							</tr>
 						</tbody>
@@ -256,17 +256,46 @@
         </div>
       </div>
     </main>
+    <div th:replace="layout/sigepad_modal::modalDetalleRegistro"></div>
     <div th:replace="layout/sigepad_layout::js-essential"></div>
     <div th:replace="layout/sigepad_layout::js-additional"></div>
     <script th:inline="none">
-    $('.btn-detalle-table').tooltip({title:'Ver detalle',placement:'top'});
-	$('.btn-ruta-table').tooltip({title:'Ruta del documento',placement:'top'});
-	$('.btn-procesar-table').tooltip({title:'Procesar documento',placement:'top'});
-	$('.btn-archivar-table').tooltip({title:'Archivar documento',placement:'top'});
+    $('.btn-detalle-table').tooltip({title:'Ver detalle'});
+	$('.btn-imprimir-table').tooltip({title:'Imprimir una copia del registro'});
+	$('.btn-procesar-table').tooltip({title:'Enviar documento'});
+	$('.btn-archivar-table').tooltip({title:'Archivar documento'});
+	
+	$('[data-toggle="popover"]').popover({
+  trigger: 'focus'
+});
 		
 	$('#select-involucrado').select2({
 		width: '100%'
 	});
+	$('#table-registros tbody').on('click','.btn-procesar-table',function(){
+      	swal({
+      		title: "Esta seguro?",
+      		text: "El registro será enviado a la UTD IG PNP para su atención!",
+      		type: "warning",
+      		showCancelButton: true,
+      		confirmButtonText: "Si, enviar!",
+      		cancelButtonText: "No, cancelar!",
+      		closeOnConfirm: false,
+      		closeOnCancel: false
+      	}, function(isConfirm) {
+      		if (isConfirm) {
+      			swal("Enviado!", "El registro fue enviado exitosamente.", "success");
+      		} else {
+      			swal("Cancelado", "El envío fue cancelado", "error");
+      		}
+      	});
+      });
+	
+		$('#table-registros tbody').on('click','.btn-detalle-table',function(){
+      	$('#modalInfoRegistro').modal('show');
+		$('#modalInfoRegistro .modal-dialog .modal-content').css("background-image","url(/images/imagecip.png)","background-color: rgba(0,0,0,0.8)");
+
+      });
     </script>
   </body>
 </html>
