@@ -16,7 +16,8 @@ public class LoginController {
 			flash.addFlashAttribute("info","Ya ha iniciado session");
 			return "redirect:/";
 		}
-		return "login";
+		model.addAttribute("titulopagina", "Login - SIGEPAD IG PNP");
+		return "sigepad_login";
 	}
 
 }

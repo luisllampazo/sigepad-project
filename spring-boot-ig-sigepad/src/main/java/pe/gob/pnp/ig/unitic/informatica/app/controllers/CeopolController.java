@@ -4,7 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("ceopol")
-public class CeopolController {
 
+public class CeopolController {
+	
+	@RequestMapping("/ceopol")
+	public String ceopol() {
+		return "";
+	}
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<meta charset="utf-8">
+  <head th:replace="layout/sigepad_layout::head"> </head>
+  <body class="app sidebar-mini">
+  	<header th:replace="layout/sigepad_layout::header"></header>
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/sigepad_layout::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/sigepad_layout::app-title"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">Create a beautiful dashboard</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:replace="layout/sigepad_layout::js-essential"></div>
+    <div th:replace="layout/sigepad_layout::js-additional"></div>
+  </body>
+</html>

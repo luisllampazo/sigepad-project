@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<meta charset="utf-8">
+  <head th:replace="layout/sigepad_layout::head"> </head>
+  <body class="app sidebar-mini">
+  	<header th:replace="layout/sigepad_layout::header"></header>
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/sigepad_layout::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/sigepad_layout::app-title"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-title-w-btn">
+              <h3 class="title">Registro de Denuncias y Otras Comunicaciones de Inconducta Funcional</h3>
+              <p><a class="btn btn-primary icon-btn" th:href="@{/odturno/registros/nuevo}"><i class="fa fa-plus"></i>Nuevo Registro</a></p>
+            </div>
+			  <div class="tile-body">
+				  <div class="container-fluid">
+					  <div class="row mb-3">
+						<div class="col-md-6 col-lg-2 mb-3">
+						 <label>
+							Tipo de Comunicación
+						  </label>
+						  	<select class="form-control">
+								<option>Todos</option>
+								<option>Denuncia Regular</option>
+								<option>Nota Informativa</option>
+							</select>
+					  </div>
+						<div class="col-md-6 col-lg-2 mb-3">
+						 <label>
+							Estado
+						  </label>
+						  	<select class="form-control">
+								<option>Nuevo</option>
+								<option>Procesado</option>
+								<option>Todos</option>
+							</select>
+					  </div>
+						<div class="col-md-6 col-lg-2 mb-3">
+						 <label>
+							Clasificacion
+						  </label>
+						  	<select class="form-control">
+								
+							</select>
+					  </div>
+						<div class="col-md-6 col-lg-3 mb-3">
+						 <label>
+							Ubigeo
+						  </label>
+						  	<select class="form-control">
+								
+							</select>
+					  </div>
+					  <div class="col-md-6 col-lg-3 mb-3">
+						<div class="form-check">
+						  <label>
+							<input type="checkbox" class="form-check-input" value="" checked>
+Fecha de Comunicación&nbsp; &nbsp; &nbsp; &nbsp; </label>
+						</div>  
+						  	<div class="input-group">
+						  		<div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+								<input class="rangofechas form-control bg-white" readonly >
+							</div> 
+					  </div>
+						
+						<div class="col-md-6 col-lg-3 mb-3">
+						<div class="form-check">
+						  <label>
+							<input type="checkbox" class="form-check-input" value="">Fecha del Hecho
+						  </label>
+						</div>
+							
+						  	<div class="input-group">
+						  		<div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+								
+								<input class="rangofechas form-control  bg-white" readonly>
+							</div>
+						  
+						</div>
+					  <div class="col-md-6 col-lg-4 mb-3">
+						  <div class="form-check">
+						  <label>
+							<input type="checkbox" class="form-check-input" value="">Involucrado
+						  </label>
+						</div>
+						  <select id="select-involucrado" class="form-control select-involucrado"></select>
+					  </div>
+						<div class="col-md-6 col-lg-3 mb-3">
+						  <label>Relación</label>
+						  <select class="form-control">
+							  <option value="" selected disabled>Seleccione Una</option>
+						    <option>Denunciante</option>
+							  <option>Denunciado</option>
+							  <option>Agraviado</option>
+							  <option>Todos</option>
+						  </select>
+					  </div>
+					  <div class="col-md-6 col-lg-2 mb-3">
+						  <label class="text-white">.</label>
+						  <button class="form-control btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+					  </div>
+					</div>
+					  <div class="row mb-3">
+						  <div class="col-12 table-responsive">
+						  	  <table id="table-denuncias" class="table table-sm table-bordered table-hover">
+								  <thead>
+									  <tr>
+										  <th><i class="fa fa-plane"></i></th>
+										  <th>Nro</th>
+										  <th>Tipo</th>
+										  <th>Fecha</th>
+										  <th>Ubigeo Hecho</th>
+										  <th>Fecha/Hora Hecho</th>
+										  <th>Clasificación</th>
+										  <th>Estado</th>
+										  <th><i class="fa fa-edit"></i></th>
+									  </tr>
+								  </thead>
+								  <tbody>
+									  <tr>
+										  <td>
+										    <button class="btn btn-primary btn-sm btn-guardar-table"><i class="fa fa-floppy-o m-0"></i></button>
+										  </td>
+										  <td>20200125465</td>
+										  <td>Denuncia Regular</td>
+										  <td></td>
+										  <td>LIMA - LIMA - LIMA</td>
+										  <td>09/05/2020 - 10:03</td>
+										  <td>Ebriedad</td>
+										  <td>Nuevo</td>
+										  <td>
+										    <button class="btn btn-primary btn-sm btn-editar-table"><i class="fa fa-pencil m-0"></i></button>
+										    <button class="btn btn-primary btn-sm btn-denunciado-table"><em class="fa fa-user-o"></em>2</button>
+										    <button class="btn btn-primary btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
+											  <button class="btn btn-danger btn-sm btn-eliminar-table"><i class="fa fa-trash m-0"></i></button>
+										  </td>
+									  </tr>
+									  <tr  class="alert-success">
+										  <td>
+										    <button class="btn btn-info btn-sm btn-info-table"><i class="fa fa-info m-0"></i></button>
+										  </td>
+										  <td>20200125465</td>
+										  <td>Denuncia Regular</td>
+										  <td>09/05/2020</td>
+										  <td>LIMA - LIMA - LIMA</td>
+										  <td>09/05/2020 - 10:03</td>
+										  <td>Ebriedad</td>
+										  <td> Procesada</td>
+										  <td>
+										    <button class="btn btn-info btn-sm btn-ver-table"><i class="fa fa-eye m-0"></i></button>
+											<button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
+											<button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
+											<button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print"></i></button>
+
+										  </td>
+									  </tr>
+								    <tr class="alert-warning">
+										  <td>
+											  <button class="btn btn-warning btn-sm btn-recibir-table"><i class="fa fa-handshake-o m-0"></i></button>
+										  </td>
+										  <td>20200125465</td>
+										  <td>Nota Informativa</td>
+										  <td>09/05/2020</td>
+										  <td>LIMA - LIMA - LIMA</td>
+										  <td>09/05/2020 - 10:03</td>
+										  <td>Ebriedad</td>
+										  <td>Nuevo</td>
+										  <td>
+											  <button class="btn btn-info btn-sm btn-ver-table"><i class="fa fa-eye m-0"></i></button>
+											  <button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
+											  <button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
+										  </td>
+									  </tr>
+								    <tr class="alert-warning">
+										  <td>
+											  <button class="btn btn-primary btn-sm btn-guardar-table"><i class="fa fa-floppy-o m-0"></i></button>
+										  </td>
+										  <td>20200125465</td>
+										  <td>Nota Informativa</td>
+										  <td>09/05/2020</td>
+										  <td>LIMA - LIMA - LIMA</td>
+										  <td>09/05/2020 - 10:03</td>
+										  <td>Ebriedad</td>
+										  <td>Nuevo</td>
+										  <td>
+											  <button class="btn btn-primary btn-sm btn-editar-table"><i class="fa fa-pencil m-0"></i></button>
+											  <button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
+											  <button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
+										  </td>
+									  </tr>
+									  <tr class="alert-success">
+										  <td>
+										    <button class="btn btn-info btn-sm btn-info-table"><i class="fa fa-info m-0"></i></button>
+										  </td>
+										  <td>20200125465</td>
+										  <td>Nota Informativa</td>
+										  <td>09/05/2020</td>
+										  <td>LIMA - LIMA - LIMA</td>
+										  <td>09/05/2020 - 10:03</td>
+										  <td>Ebriedad</td>
+										  <td> Procesada</td>
+										  <td>
+										    <button class="btn btn-info btn-sm btn-ver-table"><i class="fa fa-eye m-0"></i></button>
+											  <button class="btn btn-info btn-sm btn-denunciado-table"><i class="fa fa-user-o"></i>2</button>
+											  <button class="btn btn-info btn-sm btn-agraviado-table"><i class="fa fa-user-circle-o"></i>2</button>
+											  <button class="btn btn-info btn-sm btn-imprimir-table"><i class="fa fa-print"></i></button>
+										  </td>
+									  </tr>
+								  </tbody>
+							  </table>
+						  </div>
+					  </div>
+				  </div>
+			  </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:replace="layout/sigepad_layout::js-essential"></div>
+    <div th:replace="layout/sigepad_layout::js-additional"></div>
+    <script th:inline="none">
+    $('#table-denuncias').DataTable({
+		'columns': [{ 'orderable': false },
+    	   null,
+    	   null,
+    		null,
+			null,
+    		null,
+    		null,
+    		null,
+    		{ 'orderable': false }
+    	 ],
+		"order": [[ 1, "desc" ]],
+		"columnDefs": [
+    		    { className: "text-center", "targets": [ 0,1,2,3,4,5,6,7,8 ] }
+    		  ]
+	});
+    </script>
+  </body>
+</html>

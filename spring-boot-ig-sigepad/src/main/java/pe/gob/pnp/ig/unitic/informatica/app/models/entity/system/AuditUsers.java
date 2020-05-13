@@ -24,10 +24,8 @@ public class AuditUsers implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Usuario user;
-	
+	private Usuario usuario;
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date conecteddate;
@@ -39,6 +37,12 @@ public class AuditUsers implements Serializable {
 	public String getIpclient() {
 		return ipclient;
 	}
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 	public void setIpclient(String ipclient) {
 		this.ipclient = ipclient;
 	}
@@ -48,12 +52,7 @@ public class AuditUsers implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Usuario getUser() {
-		return user;
-	}
-	public void setUser(Usuario user) {
-		this.user = user;
-	}
+	
 	public Date getConecteddate() {
 		return conecteddate;
 	}

@@ -1,7 +1,7 @@
 package pe.gob.pnp.ig.unitic.informatica.app.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,17 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 public class IndexController {
 	
-	private List<String[]> breadcrumbs;
+	//private List<String[]> breadcrumbs;
 	
-	@RequestMapping("/")
+	@RequestMapping({"/","","index"})
 	public String index(Model model) {
-		breadcrumbs = new ArrayList<String[]>();
-		breadcrumbs.add(new String[] {null,"Inicio"});
-		model.addAttribute("claseicono","fa fa-dashboard");
-		model.addAttribute("tituloprincipal","Panel de Gestion y Resumen");
-		model.addAttribute("descripcionprincipal","Resumen de los Procedimientos Administrativos Disciplinarios");
+		model.addAttribute("titulopagina", "Index - SIGEPAD IG PNP");
+		model.addAttribute("apptitulo", "Resumen");
+		model.addAttribute("apptituloicono", "fa-dashboard");
+		model.addAttribute("apptitulodescripcion", "Resumen estadístico de los documentos");
 		model.addAttribute("active","resumen");
-		model.addAttribute("breadcrumbs",breadcrumbs);
-		return "index";
+		
+		/*breadcrumbs = new ArrayList<String[]>();
+		breadcrumbs.add(new String[] {null,"Inicio"});
+		model.addAttribute("active","resumen");
+		model.addAttribute("breadcrumbs",breadcrumbs);*/
+		return "sigepad_index";
 	}
 }

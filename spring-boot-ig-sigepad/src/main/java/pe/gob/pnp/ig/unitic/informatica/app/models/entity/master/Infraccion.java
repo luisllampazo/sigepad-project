@@ -1,7 +1,7 @@
 package pe.gob.pnp.ig.unitic.informatica.app.models.entity.master;
 
 import java.io.Serializable;
-import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import pe.gob.pnp.ig.unitic.informatica.app.models.entity.AdministradoInfraccion;
-import pe.gob.pnp.ig.unitic.informatica.app.models.entity.Clasehecho;
 
 @Entity
 public class Infraccion implements Serializable {
@@ -30,19 +23,24 @@ public class Infraccion implements Serializable {
 	private String descripcion;
 	@Column(columnDefinition="TEXT")
 	private String sancion;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private TipoInfraccion tipoinfraccion;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	private Legislacion legislacion;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "infraccion_clasehecho")
-	private List<Clasehecho> clasehecho;
+	private boolean enabled;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name="infraccion_id")
-	private List<AdministradoInfraccion> Investigadoinfraccion;
-	
-	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	public TipoInfraccion getTipoinfraccion() {
+		return tipoinfraccion;
+	}
+	public void setTipoinfraccion(TipoInfraccion tipoinfraccion) {
+		this.tipoinfraccion = tipoinfraccion;
+	}
 	public Long getId() {
 		return id;
 	}

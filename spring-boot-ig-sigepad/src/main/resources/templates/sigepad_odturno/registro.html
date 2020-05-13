@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<meta charset="utf-8">
+  <head th:replace="layout/sigepad_layout::head"> </head>
+  <body class="app sidebar-mini">
+  	<header th:replace="layout/sigepad_layout::header"></header>
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:replace="layout/sigepad_layout::app-sidebar"></aside>
+    <main class="app-content">
+      <div th:replace="layout/sigepad_layout::app-title"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-title-w-btn">
+              <h3 class="title text-uppercase">Nuevo Registro</h3>
+              <p><select class="form-control">
+				  <option>Denuncia Regular</option>
+				  <option>Nota Informativa</option>
+				  </select></p>
+            </div>
+			  <div class="tile-body">
+				  <div class="container-fluid">
+					  <div class="row">
+					    <h5 class="col-12 text-uppercase">Denunciante</h5>
+						<div class="col-md-6 col-lg-2 mb-3">
+						  <label> Tipo de Documento</label>
+					  	  <select class="form-control">
+								<option>DNI</option>
+								<option>C.E.</option>
+								<option>Pasaporte</option>
+								<option>Menor de Edad</option>
+								<option>Anónimo</option>
+							</select>
+					  </div>
+						<div class="col-md-6 col-lg-2 mb-3">
+						  <label> Nro de Documento</label>
+						  <div class="input-group">
+  <input type="text" class="form-control">
+						  <button class="input-group-append btn btn-primary"><i class="fa fa-search m-0"></i></button>
+</div>
+						  
+					  </div>
+						<div class="col-md-6 col-lg-2 mb-3">
+						  <label>Nombres</label>
+						  <input class="form-control" type="text">
+					  </div>
+						<div class="col-md-6 col-lg-2 mb-3">
+						 <label>Apellido Paterno</label>
+						  <input class="form-control" type="text">
+					  </div>
+					    <div class="col-md-6 col-lg-2 mb-3">
+						 <label>Apellido Materno</label>
+						  <input class="form-control" type="text">
+					  </div>
+						  <div class="col-md-6 col-lg-2 mb-3">
+						 <label>ORIGEN</label>
+						  <input class="form-control" type="text" value="POLICIAL" readonly>
+					  </div>
+					  <div class="col-md-6 col-lg-4 mb-3">
+						    <label>Correo Electrónico</label>
+						    <select class="form-control select-tag" multiple>
+							  
+							</select>
+					  </div>
+					  <div class="col-md-6 col-lg-4 mb-3">
+						    <label>Telefono / Celular</label>
+						    <select class="form-control select-tag" multiple>
+							  
+							</select>
+					  </div>
+					  <div class="col-md-6 col-lg-4 mb-3">
+						    <label>Dirección</label>
+						    <input class="form-control">
+					  </div>
+					</div>
+					  <div class="row">
+					    <h5 class="col-12 text-uppercase">Ubicación de los hechos</h5>
+						<div class="col-md-6 col-lg-2 mb-3">
+						  <label>Ubigeo</label>
+						  <select class="form-control">
+							
+							</select>
+					  </div>
+					    <div class="col-md-6 col-lg-3 mb-3">
+						  <label>Jurisdicción Policial</label>
+						  <select class="form-control">
+							
+							</select>
+					  </div>
+						
+						<div class="col-md-6 col-lg-5 mb-3">
+						  <label>Dirección</label>
+						  <input class="form-control" type="text">
+					  </div>
+					    <div class="col-md-6 col-lg-2 mb-3">
+							<label>Georeferencia</label>
+						  <div class="input-group">
+  <input type="text" class="form-control">
+						  <button class="input-group-append btn btn-primary"><i class="fa fa-map-marker"></i></button>
+</div>
+						  
+					  </div>
+					</div>
+					  
+					  <div class="row mb-3">
+					    <h5 class="col-12 text-uppercase">Detalle de los hechos</h5>
+					    <div class="col-lg-10">
+					  	    <label>Descripción detallada de los Hechos</label>
+					  	    <textarea class="form-control" rows="5"></textarea>
+					    </div>
+					    <div class="col-lg-2">
+							<div class="mb-3">
+								<label>Fecha del Hecho</label>
+								<div class="input-group">
+						  			<div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-calendar"></i></span></div>
+									<input id="inputfecha" class="form-control  bg-white" readonly>
+								</div>
+							</div>
+						  	<div class="mb-3">
+								<div class="form-check">
+						  			<label>
+										<input id="checkhora" type="checkbox" class="form-check-input" value="">Hora del Hecho
+						  			</label>
+								</div>
+								<div class="input-group">
+						  			<div class="input-group-prepend"><span class="input-group-text"><i class="fa fa-clock-o"></i></span></div>
+									<input id="inputhora"  class="form-control  bg-white" readonly>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+						  <label>Informacion para Identificación</label>
+						  <textarea class="form-control"></textarea>
+					    </div>
+					</div>
+					  <div class="row">
+					    <h5 class="col-12 text-uppercase">DOCUMENTO ADJUNTO</h5>
+					    
+					    
+						
+						<div class="col-md-1 mb-3">
+						  <label>Numero</label>
+						  <input class="form-control" type="text">
+					  </div>
+					    <div class="col-md-1 mb-3">
+						  <label>Año</label>
+						  <input class="form-control" type="text">
+					  </div>
+					    <div class="col-md-4 mb-3">
+						  <label>Unidad</label>
+						  <select id="select-siglasunidad" class="form-control">
+							</select>
+					  </div>
+						  <div class="col-md-6 mb-3">
+					      <label>Archivo</label>
+					      <input class="form-control" type="file">
+					  </div>
+					    
+					</div>
+					  <div class="row mb-3"><div class="col-12"><div class="line-head"></div></div></div>
+					<div class="row">
+					  <h5 class="col-12 text-uppercase">INFORMACION ADICIONAL</h5>
+					  <div class="col-md-6 col-lg-2 mb-3">
+					    <label>Legislación</label>
+					    <select class="form-control">
+							
+						</select>
+					  </div>
+					  <div class="col-md-6 col-lg-2 mb-3">
+					    <label>Procedimiento</label>
+					    <select class="form-control">
+							<option>Ordinario</option>
+							<option>Sumario</option>
+						</select>
+					  </div>
+					    <div class="col-md-6 col-lg-2 mb-3">
+					      <label>Clasificación Principal</label>
+					      <select id="select-clasificacion" class="form-control">
+							
+						  </select>
+					  </div>
+						
+					  <div class="col-md-6 col-lg-6 mb-3">
+						  <label>Clasificacion adicional</label>
+						  <select id="select-clasificacionadicional" class="form-control" multiple></select>
+					  </div>
+</div>  
+					  
+					  
+				    
+			    </div>
+			  </div>
+			  <div class="tile-footer">
+              <div class="row">
+                <div class="col-12 text-right">
+					<a class="btn btn-secondary" th:href="@{/odturno/registros}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancelar</a>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i>Guardar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:replace="layout/sigepad_layout::js-essential"></div>
+    <div th:replace="layout/sigepad_layout::js-additional"></div>
+    <script th:inline="none">
+    $('#select-siglasunidad').select2({
+		width: '100%' 
+	});
+	$('#select-clasificacion').select2({
+		width: '100%' 
+	});
+	$('#select-clasificacionadicional').select2({
+		width: '100%' 
+	});
+	$('.select-tag').select2({
+		tags: true,
+		tokenSeparators: [',', ' ']
+	})
+    </script>
+  </body>
+</html>

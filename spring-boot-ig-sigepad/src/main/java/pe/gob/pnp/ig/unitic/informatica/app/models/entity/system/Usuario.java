@@ -6,13 +6,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -29,22 +27,10 @@ public class Usuario implements Serializable{
 	private String password;
 	private Boolean enabled;
 	private Boolean conected;
-	
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Personal usuario;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "authorities")
-	private List<Role> roles;
-	
-
-	public Personal getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Personal usuario) {
-		this.usuario = usuario;
-	}
-
+	private List<Role> role;
+		
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -85,12 +71,12 @@ public class Usuario implements Serializable{
 		this.enabled = enabled;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public List<Role> getRole() {
+		return role;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRoles(List<Role> role) {
+		this.role = role;
 	}
 
 	public Boolean isConected() {

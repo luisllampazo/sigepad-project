@@ -15,8 +15,7 @@ public class Parentesco implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nombre;
-	private Boolean habilitado;
-	private Boolean seleccionado;
+	private boolean enabled;
 	public Long getId() {
 		return id;
 	}
@@ -29,18 +28,10 @@ public class Parentesco implements Serializable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public Boolean getHabilitado() {
-		return habilitado;
+	public boolean isEnabled() {
+		return enabled;
 	}
-	public void setHabilitado(Boolean habilitado) {
-		this.habilitado = habilitado;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
-	public Boolean getSeleccionado() {
-		return seleccionado;
-	}
-	public void setSeleccionado(Boolean seleccionado) {
-		this.seleccionado = seleccionado;
-	}
-	
-
 }

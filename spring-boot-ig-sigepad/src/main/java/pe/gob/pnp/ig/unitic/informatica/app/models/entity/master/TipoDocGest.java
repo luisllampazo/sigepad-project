@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import pe.gob.pnp.ig.unitic.informatica.app.models.entity.system.TipoUnidad;
-
 
 @Entity
 @Table(name = "tipodocgest")
@@ -25,7 +23,7 @@ public class TipoDocGest implements Serializable {
 	private boolean enabled;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private TipoUnidad tipoorgdisc;
+	private TipoUnidadInspectoria tipoorgdisc;
 
 	public Integer getId() {
 		return id;
@@ -51,11 +49,11 @@ public class TipoDocGest implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public TipoUnidad getTipoorgdisc() {
+	public TipoUnidadInspectoria getTipoorgdisc() {
 		return tipoorgdisc;
 	}
 
-	public void setTipoorgdisc(TipoUnidad tipoorgdisc) {
+	public void setTipoorgdisc(TipoUnidadInspectoria tipoorgdisc) {
 		this.tipoorgdisc = tipoorgdisc;
 	}
 

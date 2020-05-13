@@ -50,7 +50,7 @@ public class JpaUserDetailsService implements UserDetailsService{
 			throw new UsernameNotFoundException("Usuario "+username+" conectado");
 		}
 		
-		List<GrantedAuthority> authorities = buildUserAuthority(usuario.getRoles());
+		List<GrantedAuthority> authorities = buildUserAuthority(usuario.getRole());
 
 		return buildUserForAuthentication(usuario, authorities);
 	}

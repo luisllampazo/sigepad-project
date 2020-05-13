@@ -1,11 +1,3 @@
-$('.app-sidebar__toggle').on('click',function(){
-		  if($('body').hasClass('sidenav-toggled'))
-			  $('#imguser').addClass('px-5');
-	//		  $('#imguser').removeClass('px-5');
-		  else
-			  $('#imguser').removeClass('px-5');
-		//	  $('#imguser').addClass('px-5');
-	  });
 (function () {
 	"use strict";
 

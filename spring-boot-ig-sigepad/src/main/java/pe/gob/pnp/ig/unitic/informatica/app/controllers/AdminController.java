@@ -8,14 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pe.gob.pnp.ig.unitic.informatica.app.service.IUsuarioService;
+import pe.gob.pnp.ig.unitic.informatica.app.service.IUsuarioPerfilService;
 
 @Controller
 @RequestMapping("/administrador")
 public class AdminController {
 
 	@Autowired
-	private IUsuarioService usuarioService;
+	private IUsuarioPerfilService usuarioService;
 	private List<String[]> breadcrumbs;
 	
 	@RequestMapping({"/",""})
@@ -39,7 +39,7 @@ public class AdminController {
 		model.addAttribute("descripcionprincipal","Creacion, modificacio y auditoria de usuarios");
 		model.addAttribute("active","usuarios");
 		model.addAttribute("breadcrumbs",breadcrumbs);
-		model.addAttribute("usuarios",usuarioService.findAll());
+		
 		return "administrador/usuarios";
 	}
 }

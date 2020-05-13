@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.gob.pnp.ig.unitic.informatica.app.models.dao.IComisariaDao;
+import pe.gob.pnp.ig.unitic.informatica.app.models.dao.IJurisdiccionDao;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Jurisdiccion;
 import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Ubigeo;
 
@@ -13,7 +13,7 @@ import pe.gob.pnp.ig.unitic.informatica.app.models.entity.master.Ubigeo;
 public class ComisariaServiceImpl implements IComisariaService{
 	
 	@Autowired
-	private IComisariaDao comisariaDao;
+	private IJurisdiccionDao comisariaDao;
 	
 	@Override
 	public List<Jurisdiccion> findByUbigeo_id(String ubigeo_id) {

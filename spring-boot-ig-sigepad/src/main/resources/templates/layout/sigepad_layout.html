@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+  <head th:fragment="head">
+    <meta name="description" content="SIGEPAD es un sistema informático creado por la UNITIC IGPNP para el seguimiento de los Procesos Administrativos Disciplinarios.">
+    <title th:text="${titulopagina}"></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/daterangepicker.css}">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body class="app sidebar-mini">
+    <!-- Navbar-->
+    <header th:fragment="header" class="app-header"><a class="app-header__logo" th:href="@{/}">SIGEPAD</a><!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
+      <!-- Navbar Right Menu-->
+      <ul class="app-nav">
+        <!--Notification Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Show notifications"><i class="fa fa-bell-o fa-lg"></i></a>
+          <ul class="app-notification dropdown-menu dropdown-menu-right">
+            <li class="app-notification__title">Tienes 4 notificaciones Nuevas.</li>
+            <div class="app-notification__content">
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Lisa sent you a mail</p>
+                    <p class="app-notification__meta">2 min ago</p>
+                  </div></a></li>
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Mail server not working</p>
+                    <p class="app-notification__meta">5 min ago</p>
+                  </div></a></li>
+              <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                  <div>
+                    <p class="app-notification__message">Transaction complete</p>
+                    <p class="app-notification__meta">2 days ago</p>
+                  </div></a></li>
+              <div class="app-notification__content">
+                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></span>
+                    <div>
+                      <p class="app-notification__message">Lisa sent you a mail</p>
+                      <p class="app-notification__meta">2 min ago</p>
+                    </div></a></li>
+                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-danger"></i><i class="fa fa-hdd-o fa-stack-1x fa-inverse"></i></span></span>
+                    <div>
+                      <p class="app-notification__message">Mail server not working</p>
+                      <p class="app-notification__meta">5 min ago</p>
+                    </div></a></li>
+                <li><a class="app-notification__item" href="javascript:;"><span class="app-notification__icon"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x text-success"></i><i class="fa fa-money fa-stack-1x fa-inverse"></i></span></span>
+                    <div>
+                      <p class="app-notification__message">Transaction complete</p>
+                      <p class="app-notification__meta">2 days ago</p>
+                    </div></a></li>
+              </div>
+            </div>
+            <li class="app-notification__footer"><a href="#">Ver todas las notificaciones.</a></li>
+          </ul>
+        </li>
+        <!-- User Menu-->
+        <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li><a class="dropdown-item" href="page-user.html"><i class="fa fa-cog fa-lg"></i> Configuracion</a></li>
+            <li><a class="dropdown-item" th:href="@{/usuarios/perfil}"><i class="fa fa-user fa-lg"></i> Perfil</a></li>
+            <li><a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out fa-lg"></i> Salir</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+    <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    <aside th:fragment="app-sidebar" class="app-sidebar">
+		<div class="text-center">
+			 <img class="app-sidebar__user-avatar img-fluid m-0" th:src="@{/images/default-user.jpg}" alt="User Image">
+		</div>
+		<div class="app-sidebar__user">
+		<div class="text-center" style="width: 100%">
+		  	<p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuariogrado}"></p>
+	     	<p class="app-sidebar__user-name"><small th:text="${session.usuarionombre}"></small></p>
+		 	<p class="app-sidebar__user-name font-weight-bold" th:text="${session.usuariocargo}"></p>
+			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuariounidad}"></p>
+			<p class="app-sidebar__user-designation font-weight-bold" th:text="${session.usuariosede}"></p>
+		  
+        </div>
+      </div>
+      <ul class="app-menu">
+      	<li><a class="app-menu__item" th:classappend="${active == 'resumen'}?'active'" th:href="@{/}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label"> Inicio</span></a></li>
+      	<li sec:authorize="hasRole('ROLE_IG')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-diamond"></em><span class="app-menu__label">Inspector General</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" th:href="@{/odturno/monitoreo}"><i class="icon fa fa-circle-o"></i> Director</a></li>
+          </ul>
+        </li>
+      	<li sec:authorize="hasRole('ROLE_DIRINV')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-university"></em><span class="app-menu__label">Dirección de Investigaciones</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+          <ul class="treeview-menu">
+            <li sec:authorize="hasRole('ROLE_INVDIR')"><a class="treeview-item" th:href="@{/dirinv/director}"><i class="icon fa fa-circle-o"></i> Director</a></li>
+            <li sec:authorize="hasRole('ROLE_INVUTD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:href="@{/dirinv/unitradoc}"><i class="icon fa fa-circle-o"></i> Trámite Documentario</a></li>
+          </ul>
+        </li>
+      	<li sec:authorize="hasRole('ROLE_UTDIG')"><a class="app-menu__item" th:classappend="${active == 'utd'}?'active'" th:href="@{/unitradoc}"><i class="app-menu__icon fa fa-files-o"></i><span class="app-menu__label">Trámite Documentario</span></a></li> 
+      	<li sec:authorize="hasRole('ROLE_CEOPOL')"><a class="app-menu__item" th:classappend="${active == 'ceopol'}?'active'" th:href="@{/ceopol}"><i class="app-menu__icon fa fa-shield"></i><span class="app-menu__label">CEOPOL</span></a></li> 
+      	
+      	<li sec:authorize="hasRole('ROLE_ODT')" class="treeview" th:classappend="${active == 'odtregistros'}?'is-expanded':(${active == 'odtjefatura'}?'is-expanded')"><a class="app-menu__item" th:classappend="${active == 'odtregistros'}?'active':(${active == 'odtjefatura'}?'active')" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-laptop"></em><span class="app-menu__label">OD Turno</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+          <ul class="treeview-menu">
+            <li sec:authorize="hasRole('ROLE_JEFOD')"><a class="treeview-item" th:classappend="${active == 'odtjefatura'}?'active'" th:href="@{/odturno/jefatura}"><i class="icon fa fa-circle-o"></i> Jefatura</a></li>
+            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:classappend="${active == 'odtregistros'}?'active'" th:href="@{/odturno/registros}"><i class="icon fa fa-circle-o"></i> Registros</a></li>
+          </ul>
+        </li>
+        
+      	<li sec:authorize="hasRole('ROLE_OD')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-folder-o"></em><span class="app-menu__label">Oficina de Disciplina</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+          <ul class="treeview-menu">
+          	<li sec:authorize="hasRole('ROLE_JEFOD')"><a class="treeview-item" th:href="@{/od/jefatura}"><i class="icon fa fa-circle-o"></i> Jefatura</a></li>
+            <li sec:authorize="hasRole('ROLE_SECOD')"><a class="treeview-item" th:href="@{/od/secretaria}"><i class="icon fa fa-circle-o"></i> Secretaría</a></li>
+            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:href="@{/od/investigaciones}"><i class="icon fa fa-circle-o"></i> Investigaciones</a></li>
+            <li sec:authorize="hasRole('ROLE_AUXOD') or hasRole('ROLE_INSTOD')"><a class="treeview-item" th:href="@{/od/expedientes}"><i class="icon fa fa-circle-o"></i> Expedientes</a></li>
+          </ul>
+        </li>
+        <li sec:authorize="hasRole('ROLE_REP')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-bar-chart"></em><span class="app-menu__label">Reportes</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="ui-cards.html"><i class="icon fa fa-circle-o"></i> Denuncia</a></li>
+            <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Investigacion</a></li>
+            <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> Decision</a></li>
+            <li><a class="treeview-item" href="widgets.html"><i class="icon fa fa-circle-o"></i> 2da Instancia</a></li>
+          </ul>
+        </li>
+        <li sec:authorize="hasRole('ROLE_ADMIN')" class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><em class="app-menu__icon fa fa-cogs"></em><span class="app-menu__label">Administrador del Sistema</span><em class="treeview-indicator fa fa-angle-right"></em></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" th:href="@{/admin/usuarios}"><i class="icon fa fa-circle-o"></i> Usuarios</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+    <aside th:fragment="app-sidebar2" class="app-sidebar">
+		<div class="text-center">
+			 <img class="app-sidebar__user-avatar img-fluid m-0" src="images/default-user.jpg" alt="User Image">
+		</div>
+		<div class="app-sidebar__user">
+		<div class="text-center" style="width: 100%">
+		  <p class="app-sidebar__user-name font-weight-bold">CAPITAN S</p>
+	      <p class="app-sidebar__user-name"><small>LLAMPAZO MANDAMIENTO LUIS RICARDO</small></p>
+		  <p class="app-sidebar__user-name font-weight-bold">INSTRUCTOR</p>
+			<p class="app-sidebar__user-designation font-weight-bold">OD - 15</p>
+			<p class="app-sidebar__user-designation font-weight-bold">(SEDE TRANSITO)</p>
+		  
+        </div>
+      </div>
+      <ul class="app-menu">
+      </ul>
+    </aside>
+    <main class="app-content">
+      <div th:fragment="app-title" class="app-title">
+        <div>
+          <h1><em class="fa" th:classappend="${apptituloicono}"></em> <label th:text="${apptitulo}"></label> </h1>
+          <p th:text="${apptitulodescripcion}"></p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="#">Blank Page</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">Create a beautiful dashboard</div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:fragment="js-essential">
+    <!-- Essential javascripts for application to work-->
+    <script th:src="@{/js/jquery3.3.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script th:src="@{/js/moment.min.js}"></script>
+    <script th:src="@{/js/plugins/pace.min.js}"></script>
+    </div>
+    <div th:fragment="js-additional">
+    <script th:src="@{/js/plugins/daterangepicker.js}"></script>
+	<script th:src="@{/js/plugins/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/js/plugins/dataTables.bootstrap4.min.js}"></script>
+	<script th:src="@{/js/plugins/sweetalert.min.js}"></script>
+	<script th:src="@{/js/plugins/select2.min.js}"></script>
+	<script th:src="@{/js/sigepad-daterange.js}"></script>
+    </div>
+    <!-- Page specific javascripts-->
+   
+  </body>
+</html>
