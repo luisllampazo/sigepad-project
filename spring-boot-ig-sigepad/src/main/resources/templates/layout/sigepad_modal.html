@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+	lang="es">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div th:fragment="modalDetalleRegistro" class="modal fade" id="modalInfoRegistro" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">REGISTRO N° 202000216545DR&nbsp; <small>(10/05/2020)</small></h4>
+        <h5>(ORDINARIO) LEY 30414</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+	  	  <div class="row mb-3">
+				<div class="col-12 font-italic font-weight-bold"><em class="fa fa-user-o"></em> DENUNCIANTE: (DNI) 43795932 - CIVIL </div>
+				<div class="col-lg-6">
+				  <strong>NOMBRES Y APELLIDOS:</strong> LUIS RICARDO LLAMPAZO MANDAMIENTO <strong>(CIVIL)</strong>
+			  </div>
+				<div class="col-lg-6">
+				  <strong>DIRECCIÓN:</strong> CALLE ONTARIO 254 - URB LA CAMPIÑA - CHORRILLOS - LIMA
+				</div>
+				<div class="col-lg-6">
+				  <strong>E-MAIL:</strong> luis.llampazo@gmail.com
+			  </div>
+				<div class="col-lg-6">
+				  <strong>TELÉFONO:</strong> 952501373
+				</div>
+			</div>
+		  <div class="row mb-3">
+				<div class="col-12 font-italic font-weight-bold"><em class="fa fa-map-marker"></em> UBICACIÓN DE LOS HECHOS:</div>
+		    <div class="col-lg-6"><strong>UBIGEO:</strong> LIMA - LIMA - LIMA <strong>(COMISARÍA DE LA FAMILIA)</strong></div>
+		    <div class="col-lg-6">
+				  <strong>DIRECCIÓN:</strong> CALLE ONTARIO 254 - URB LA CAMPIÑA - CHORRILLOS - LIMA
+			  </div>
+</div>
+		  <div class="row mb-3 text-justify">
+				<div class="col-12 font-italic font-weight-bold"><i class="fa fa-file-text-o"></i> DETALLE DE LOS HECHOS: (12/05/2020 - 20:30)</div>
+		    <div class="col-lg-12"><p>Lorem ipsum dolor sit amet consectetur adipiscing, elit ad duis massa conubia congue, sapien ante egestas iaculis aptent. Ac ullamcorper mattis torquent integer ad proin augue felis potenti sapien nascetur viverra, dictumst facilisis sed rutrum congue ornare ut penatibus malesuada gravida ultricies. Dictumst pulvinar vivamus senectus morbi cum torquent proin, aptent quam scelerisque primis ultrices facilisi per malesuada, aliquam cursus massa ridiculus class eu. Congue consequat senectus sapien malesuada feugiat parturient facilisis tempor ultricies quisque, imperdiet elementum platea molestie velit eros montes condimentum.</p> <p>Nunc condimentum metus rutrum lacus aenean posuere ridiculus duis, aliquet elementum rhoncus nisl dui eu in, libero mus nisi scelerisque cursus dis aliquam. Dapibus ornare egestas fringilla porttitor interdum pharetra iaculis velit, quisque primis ultricies suspendisse lobortis proin id turpis, curabitur pretium habitasse per ante class mus. Placerat dis hac parturient vel eget urna pellentesque, velit sociis at ante vivamus ac nostra suspendisse, libero sodales turpis inceptos sed morbi imperdiet, magnis gravida et ut mauris habitant.</p></div>
+			<div class="col-lg-12">
+				<p><strong><em>(Información para Identificación) </em></strong>Lorem ipsum dolor sit amet consectetur adipiscing, elit ad duis massa conubia congue, sapien ante egestas iaculis aptent. Ac ullamcorper mattis torquent integer ad proin augue felis potenti sapien nascetur viverra, dictumst facilisis sed rutrum congue ornare ut penatibus malesuada gravida ultricies. Dictumst pulvinar vivamus senectus morbi cum torquent proin, aptent quam scelerisque primis ultrices facilisi per malesuada, aliquam cursus massa ridiculus class eu. Congue consequat senectus sapien malesuada feugiat parturient facilisis tempor ultricies quisque, imperdiet elementum platea molestie velit eros montes condimentum.</p></div>
+		    <div class="col-lg-12"><strong><em>Clasificación</em>:</strong>
+		      <label class="badge badge-primary">Violencia Familiar</label>
+				<label class="badge badge-secondary">Violencia Contra la Mujer</label>
+				<label class="badge badge-secondary">Ebriedad</label>
+			</div>
+</div>
+			
+					  <div class="row mb-3">
+				<div class="col-12 font-italic font-weight-bold"><em class="fa fa-paperclip"></em> DOCUMENTOS ADJUNTOS:</div>
+		    	<div class="col-12">
+					<ul class="list-group list-group-flush">
+  <li class="list-group-item bg-transparent">Nota Informativa 020-2020 (COMANDANCIA GENERAL) <a href="#" class="fa fa-download"></a></li>
+</ul>
+				</div>
+		    </div>
+			<div class="row mb-3">
+				<div class="col-lg-6 font-italic font-weight-bold">
+					<label><i class="fa fa-user-o"></i> DENUNCIADO (S)</label>
+					<ul class="list-group list-group-flush">
+					  	<li class="list-group-item bg-transparent font-weight-normal">CAP S. LLAMPAZO MANDAMIENTO LUIS RICARDO</li>
+						<li class="list-group-item bg-transparent font-weight-normal">CAP S. MEDINA ZEGARRA GUILLERMO ENRIQUE</li>
+					</ul>
+			  </div>
+				<div class="col-lg-6 font-italic font-weight-bold">
+				<label><i class="fa fa-user-o"></i> AGRAVIADO (S)</label>
+					<ul class="list-group list-group-flush">
+					  	<li class="list-group-item bg-transparent font-weight-normal">PERUANO: LLAMPAZO MANDAMIENTO LUIS RICARDO (SIN PARENTESCO)</li>
+						<li class="list-group-item bg-transparent font-weight-normal">PERUANO: MEDINA ZEGARRA GUILLERMO ENRIQUE (SIN PARENTESCO)</li>
+					</ul>
+			  </div>
+			</div>
+		  <div class="row">
+				<div class="col-12 font-italic text-black-50"><footer><em class="fa fa-pencil"></em> Registrado por: ST3. FLORES ESTRADA ENRIQUE MOISES (OD N° 14 - DIRTTSV - LIMA)</footer>
+			  </div>
+		    	
+	      </div>
+	    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modalDenunciado">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Denunciados</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+						<div class="container">
+                      	<div class="row mb-2">
+							<div class="col-md-2">
+								<div class="animated-radio-button small">
+              <label>
+                <input type="radio" name="inputws" id="rbcip" value="1" checked><span class="label-text">CIP</span>
+              </label>
+            </div>
+								<input id="cipBuscado" class="form-control form-control-sm"/>
+							</div>
+							<div class="col-md-2">
+								<div class="animated-radio-button small">
+              <label>
+                <input type="radio" id="rbdni" name="inputws" value="2"><span class="label-text">DNI</span>
+              </label>
+            </div>
+			<input id="dniBuscado" name="inputs" +class="form-control form-control-sm" disabled>
+							</div>
+							<div class="col-md-2">
+								<div class="animated-radio-button small">
+              <label>
+                <input type="radio" id="rbnombre" name="inputws" value="3"><span class="label-text">Nombre</span>
+              </label>
+            </div>
+								<input id="nombreBuscado" class="form-control form-control-sm text-uppercase" disabled/>
+							</div>
+							<div class="col-md-2">
+								<label class="small">Apellido Paterno</label>
+								<input id="paternoBuscado" class="form-control form-control-sm text-uppercase" disabled/>
+							</div>
+							<div class="col-md-2">
+								<label class="small">Apellido Materno</label>
+								<input id="maternoBuscado" class="form-control form-control-sm text-uppercase" disabled/>
+							</div>
+<div class="col-md-2">
+			  <label class="text-white">.</label>
+								<button id="searchPersonal" class="btn btn-primary form-control form-control-sm"><em class="fa fa-search" aria-hidden="true"></em>Buscar</button>
+							</div>
+							
+							
+						</div>
+						
+						<div class="row mb-2"> </div>
+	
+							<div class="row mb-2">
+						 	<div class="col-md-12">
+								PERSONAL ENCONTRADO
+							</div>
+						</div>
+						<div class="row">
+						 	<div class="col-md-12 table-responsive border rounded p-3 mb-2">
+							  <table id="tablaPersonalEncontrado" class="table table-bordered small table-hover table-striped table-sm">
+									<thead>
+										<tr>
+											<th>CIP</th>
+											<th>DNI</th>
+											<th>GRADO</th>
+											<th>APELLIDOS Y NOMBRES</th>
+											<th>UNIDAD</th>
+											<th>SITUACION</th>
+											<th class="text-center"><em class="fa fa-level-down" aria-hidden="true"></em></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+						<div class="row my-2">
+						 	<div class="col-md-12">
+								PERSONAL DENUNCIADO
+							</div>
+						</div>
+							<div class="row">
+						 	<div class="col-md-12 table-responsive border rounded p-3 mb-2">
+							  <table id="tablaPersonalDenunciado" class="table table-bordered small table-hover table-striped table-sm">
+									<thead>
+										<tr>
+											<th>CIP</th>
+											<th>DNI</th>
+											<th>GRADO</th>
+											<th>APELLIDOS Y NOMBRES</th>
+											<th>UNIDAD</th>
+											<th class="text-center"><em class="fa fa-level-up" aria-hidden="true"></em></th>
+										</tr>
+									</thead>
+									<tbody>
+										
+										
+									</tbody>
+								</table>
+							</div>
+							
+						</div>
+					  </div>
+                    </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+			<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        	<button class="btn btn-primary" type="button">Guardar Cambios</button>
+                      
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>
